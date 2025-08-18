@@ -5,7 +5,7 @@ import type { CreateEmbeddingResponse } from "openai/resources/embeddings";
 
 export type Chunk = { id: string; text: string; vector: number[] };
 
-const DOCS_DIR = path.join(process.cwd(), "data", "docs");
+const DOCS_DIR = path.join(process.cwd(), "src", "data", "docs");
 let CHUNKS: Chunk[] | null = null;
 
 async function embed(texts: string[]): Promise<number[][]> {

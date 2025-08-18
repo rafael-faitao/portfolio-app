@@ -3,8 +3,6 @@ import { openai, CHAT_MODEL } from "@/lib/openai";
 import { search, buildSystemPrompt } from "@/lib/rag";
 import { profile } from "@/data/profile";
 
-export const runtime = "edge"; // fast, low‑latency
-
 export async function POST(req: NextRequest) {
   try {
     const { messages, lang } = await req.json();
@@ -28,6 +26,8 @@ export async function POST(req: NextRequest) {
         ...messages,
       ],
     });
+
+    console.dir('completion', completion);
 
     const text = completion.choices?.[0]?.message?.content ?? "";
     return NextResponse.json({ reply: text }, { status: 200 });
