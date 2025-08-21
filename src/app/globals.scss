@@ -17,14 +17,16 @@ section {
 }
 
 .hero-section {
-    background: url('/images/bg.svg');
+    //background: url('/images/bg.svg');
     background-size: cover;
     align-items: center;
     justify-content: center;
+    z-index: 2;
 
     .top {
         width: 20rem;
         align-items: center;
+            z-index: 2;
 
         h1 {
             margin:0;
@@ -41,18 +43,25 @@ section {
     .main-line {
         font-family: 'Consolas';
         font-size: 2.8rem;
+        margin-top:2rem;
+            z-index: 2;
     }
 
     .prompt {
         height: 30rem;
         width: 50%;
-        margin-top: 6rem;
+        margin-top: 4rem;
         border: 1px solid #FFFFFF;
         border-radius: 2rem;
         position: relative;
 
         .answers {
+            font-family: 'Manrope' !important;
             padding: 1rem;
+            height: calc(100% - 5rem);
+            overflow: scroll;
+            scrollbar-width: none;
+            scrollbar-width: 0;
 
             .user, .assistant {
                 display: flex;
@@ -105,6 +114,18 @@ section {
             button {
                 width: 5rem;
                 height: 2rem;
+                background: rgba(0,0,0,0);
+                color: white;
+                border: 2px solid white;
+                border-radius: 12px;
+                font-weight: bold;
+                font-family: 'Manrope';
+                cursor: pointer;
+                transition: .2s all;
+
+                &:hover {
+                    background:#ffffff13 !important;
+                }
             }
         }
     }

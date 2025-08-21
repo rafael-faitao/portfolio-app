@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react";
+import HeroBg from "./hero-bg";
 
 type Msg = {
   role: "user" | "assistant";
@@ -65,6 +66,7 @@ export default function Home() {
 
   return (
     <main>
+      <HeroBg />
       <section className="hero-section flex-col">
         <div className="top flex-col">
           <img src="images/main-pic.png" alt="Main" />
@@ -93,15 +95,16 @@ export default function Home() {
               Send
             </button>
           </div>
-          <div className="answers">
+          <pre className="answers">
             {messages.map((msg, i) => (
               <div key={i} className={msg.role}>
                 <span>{msg.content}</span>
               </div>
             ))}
-          </div>
+          </pre>
         </div>
       </section>
+
     </main>
   );
 }
