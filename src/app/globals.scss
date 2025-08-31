@@ -1,3 +1,73 @@
+// Experience timeline styles (isolated)
+.experience {
+    position: relative;
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+
+    .experience-list {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    .experience-card {
+        border: 1px solid #fff;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        width: 350px;
+        background: rgba(0,0,0,0.4);
+        color: #fff;
+        box-shadow: 0 2px 16px #0002;
+
+        .experience-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .experience-where-when {
+            color: #ccc;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+        .experience-techs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            img {
+                width: 24px;
+                height: 24px;
+            }
+        }
+        .experience-description {
+            font-size: 0.95rem;
+            color: #bbb;
+        }
+    }
+
+    .experience-add-btn {
+        position: absolute;
+        left: 50%;
+        bottom: 1.5rem;
+        transform: translateX(-50%);
+        background: #222;
+        color: #fff;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        font-size: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 8px #0004;
+    }
+}
 html,
 body {
     margin: 0;

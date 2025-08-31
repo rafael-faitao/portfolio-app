@@ -164,7 +164,7 @@ export default function Home() {
               <div className="stacks-list">
                 {stacks.map((stack: any) => {
                   return (
-                    <div>
+                    <div key={stack.code}>
                       <span>{stack.title}</span>
                       <img src={`images/${stack.code}.svg`} />
                       <span>{stack.percentage}%</span>
@@ -255,6 +255,71 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+
+      <div className="projects">
+        <div className="projects-list">
+          {projects.map((exp, idx) => (
+            <div key={idx} className="experience-card">
+              <div className="experience-title">{exp.title}</div>
+              <div className="experience-where-when">{exp.where} - {exp.when}</div>
+              <div className="experience-description">{exp.description}</div>
+              <div className="experience-techs">
+                {exp.techs.map((tech: string) => (
+                  <img key={tech} src={`images/${tech}.svg`} alt={tech} style={{ width: '24px', height: '24px' }} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <section className="experience">
+        <div className="experience-list">
+          {projects.map((exp, idx) => (
+            <div key={idx} className="experience-card">
+              <div className="experience-title">{exp.title}</div>
+              <div className="experience-where-when">{exp.where} - {exp.when}</div>
+              <div className="experience-techs">
+                {exp.techs.map((tech: string) => (
+                  <img key={tech} src={`images/${tech}.svg`} alt={tech} style={{ width: '24px', height: '24px' }} />
+                ))}
+              </div>
+              <div className="experience-description">{exp.description}</div>
+            </div>
+          ))}
+        </div>
+        <button className="experience-add-btn">+</button>
+      </section>
+
+      <section className="contact-me">
+        <span className="big-title">Let's work together!</span>
+        <form action="">
+          <input type="text" placeholder="Name" />
+          <input type="email" placeholder="Email" />
+          <input type="text" placeholder="Subject" />
+          <textarea placeholder="Message"></textarea>
+          <div className="form-footer">
+            <div className="social-networks">
+              <a href="#" className="social-network">
+                <img src="images/whatsapp.svg" alt="WhatsApp" />
+              </a>
+              <a href="#" className="social-network">
+                <img src="images/linkedin.svg" alt="LinkedIn" />
+              </a>
+              <a href="#" className="social-network">
+                <img src="images/github.svg" alt="GitHub" />
+              </a>
+              <a href="#" className="social-network">
+                <img src="images/phone.svg" alt="Phone" />
+              </a>
+              <a href="#" className="social-network">
+                <img src="images/email.svg" alt="Email" />
+              </a>
+            </div>
+            <button className="btn submit-btn" type="submit">Send <img src="images/send.svg" /></button>
+          </div>
+        </form>
       </section>
     </main>
   );
