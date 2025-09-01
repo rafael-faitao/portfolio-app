@@ -56,6 +56,38 @@ export default function Home() {
       techs: ["csharp", "react"],
       link: "https://github.com/user/project-a",
     },
+        {
+      title: "vProMedia",
+      when: "2022",
+      where: "Project Mark",
+      description: "Canva-like collaborative tool to craft proposals, including images and exportation to PDF",
+      techs: ["angular", "nodejs"],
+      link: "https://github.com/user/project-a",
+    },
+    {
+      title: "Design+",
+      when: "2022",
+      where: "Project Mark",
+      description: "Canva-like collaborative tool to craft proposals, including images and exportation to PDF",
+      techs: ["csharp", "react"],
+      link: "https://github.com/user/project-a",
+    },
+        {
+      title: "vProMedia",
+      when: "2022",
+      where: "Project Mark",
+      description: "Canva-like collaborative tool to craft proposals, including images and exportation to PDF",
+      techs: ["angular", "nodejs"],
+      link: "https://github.com/user/project-a",
+    },
+    {
+      title: "Design+",
+      when: "2022",
+      where: "Project Mark",
+      description: "Canva-like collaborative tool to craft proposals, including images and exportation to PDF",
+      techs: ["csharp", "react"],
+      link: "https://github.com/user/project-a",
+    },
 
   ];
 
@@ -284,7 +316,6 @@ export default function Home() {
                     key={tech}
                     src={`images/icons/${tech}.svg`}
                     alt={tech}
-                    style={{ width: "24px", height: "24px" }}
                   />
                 ))}
               </div>
@@ -295,8 +326,10 @@ export default function Home() {
       </section>
       <section className="experience">
         <div className="experience-list">
+          <div className="line"></div>
           {projects.map((exp, idx) => (
-            <div key={idx} className="experience-card default">
+            <div className="experience-row" key={idx}>
+              <div className="experience-card default">
               <div className="experience-title">{exp.title}</div>
               <div className="experience-where-when">
                 {exp.where} - {exp.when}
@@ -305,7 +338,7 @@ export default function Home() {
                 {exp.techs.map((tech: string) => (
                   <img
                     key={tech}
-                    src={`images/${tech}.svg`}
+                    src={`images/icons/${tech}.svg`}
                     alt={tech}
                     style={{ width: "24px", height: "24px" }}
                   />
@@ -313,6 +346,8 @@ export default function Home() {
               </div>
               <div className="experience-description">{exp.description}</div>
             </div>
+            <div className="tick"></div>
+              </div> 
           ))}
         </div>
         <button className="experience-add-btn">+</button>

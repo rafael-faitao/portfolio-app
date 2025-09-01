@@ -31,12 +31,12 @@ section {
 }
 
 .btn-default {
-    border:none;
-    color:black;
+    border: none;
+    color: black;
     font-family: 'Space Grotesk';
     background: #FFFFFF;
-    border-radius:50px 50px 50px 50px;
-    padding:0.5rem 1rem;
+    border-radius: 50px 50px 50px 50px;
+    padding: 0.5rem 1rem;
     font-weight: 400;
     font-size: 1.1rem;
 }
@@ -159,9 +159,10 @@ section {
 
 }
 
-.about-me {
+section.about-me {
 
-    .left, .right {
+    .left,
+    .right {
         display: flex;
     }
 
@@ -199,7 +200,7 @@ section {
 
                     img {
                         margin: 0.5rem 0rem;
-                        width:1.7rem;
+                        width: 1.7rem;
                     }
                 }
             }
@@ -243,20 +244,21 @@ section {
 
                     margin-top: 1rem;
 
-                                            display:flex;
-                        flex-direction: column;
+                    display: flex;
+                    flex-direction: column;
 
                     .content {
-                        display:flex;
+                        display: flex;
                         flex-direction: column;
-                        flex:1;
+                        flex: 1;
                         justify-content: space-between;
+
                         .experience-count {
                             font-size: 2.5rem;
                         }
 
                         .btn-row {
-                            width:100%;
+                            width: 100%;
                             display: flex;
                             justify-content: flex-end;
                         }
@@ -276,45 +278,46 @@ section {
 
                 .projects {
                     &.content {
-                        width:100%;
-                        display:flex;
+                        width: 100%;
+                        display: flex;
                         flex-direction: column;
                         justify-content: space-between;
-                        flex:1;
+                        flex: 1;
+
                         button {
-                            width:100%;
+                            width: 100%;
                         }
 
                         .project-card {
-                            background:#272727;
-                            padding:1rem;
+                            background: #272727;
+                            padding: 1rem;
                             border-radius: 8px;
                             box-shadow: 0px 4px 4px 0px #00000040;
-                            margin-bottom:1rem;
+                            margin-bottom: 1rem;
 
                             .title {
                                 font-weight: 500;
-                                margin-bottom:1rem;
+                                margin-bottom: 1rem;
                             }
 
                             .where-and-when {
                                 font-weight: 400;
-                                margin-bottom:1rem;
+                                margin-bottom: 1rem;
                             }
 
                             .techs-row {
-                                display:flex;
-                                margin-bottom:1rem;
+                                display: flex;
+                                margin-bottom: 1rem;
 
                                 img {
-                                    margin-right:0.5rem;
-                                    width:1.7rem;
+                                    margin-right: 0.5rem;
+                                    width: 1.7rem;
                                 }
 
                                 .description {
-                                    height:3rem;
-                                    overflow:hidden;
-                                    text-overflow:ellipsis;
+                                    height: 3rem;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
                                 }
                             }
                         }
@@ -326,29 +329,111 @@ section {
 
 }
 
+section.projects {
+
+    .projects-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2rem;
+        margin: 0 auto;
+
+
+        .experience-card {
+            color: #909090;
+            width: 45rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            max-height: 33rem;
+            max-width: 25rem;
+
+            .upper {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .lower {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+
+                img {
+                    margin-right: 1rem;
+                    width: 3rem;
+                }
+            }
+
+                .experience-title {
+                    color: white;
+                    font-size: 1.4rem;
+                    margin-bottom: 1rem;
+                    width: 100%;
+                    display: flex;
+                }
+
+                .experience-where-when {
+                    margin-bottom: 1rem;
+                    width: 100%;
+                    display: flex;
+                }
+            
+        }
+    }
+}
+
 // Experience timeline styles (isolated)
-.experience {
+section.experience {
     position: relative;
-    min-height: 40vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
+    min-height: 100svh;
+    height: auto !important;
+    
 
     .experience-list {
-        width: 100%;
+        width: 70%;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 2rem;
+        margin:0 auto;
         margin-bottom: 4rem;
+
+        .line {
+            border-right:1px solid #ddd;
+            width:1px;
+            height:100%;
+            position: absolute;
+            top:0;
+            left: 50%;
+        }
     }
 
+    .experience-row{
+        width:100%;
+        display:flex;
+        justify-content: flex-start;
+        position: relative;
+
+        &:nth-child(2n) {
+            justify-content: flex-end;
+        }
+
+        .tick{
+            width:3rem;
+            height:1px;
+            border-bottom:1px solid #ddd;
+            position: absolute;
+            left: calc(50% - 1.5rem);
+            top: 50%;
+        }
+        
     .experience-card {
         border: 1px solid #fff;
         border-radius: 1rem;
         padding: 1.5rem;
-        width: 350px;
+        width: 30rem;
         background: rgba(0, 0, 0, 0.4);
         color: #fff;
         box-shadow: 0 2px 16px #0002;
@@ -381,6 +466,7 @@ section {
         }
     }
 
+    }
     .experience-add-btn {
         position: absolute;
         left: 50%;
@@ -415,102 +501,55 @@ section {
 
 }
 
-section.projects {
-    
-    .projects-list {
-        display:grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap:2rem;
-    .experience-card {
-        color:#909090;
-        width: 45rem;
-        display:flex;
-        flex-direction: column;
 
-        .upper {
-            display:flex;
-            flex-direction: column;
-        }
-
-        .lower {
-            display:flex;
-            flex-direction: row;
-            width:100%;
-
-            img {
-                margin-right: 1rem;;
-            }
-        }
-
-        .experience-card {
-        .experience-title {
-            color:white;
-            font-size: 1.4rem;
-            margin-bottom:1rem;
-            width:100%;
-            display:flex;
-        }
-
-        .experience-where-when {
-            margin-bottom:1rem;
-            width:100%;
-            display:flex;
-        }
-        }
-
-
-    }
-    }
-}
 
 .skill-circle {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  width: 4rem;
-  height: 4rem;
-
-
-  .content {
-    position: absolute;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;    
-    z-index: 3;
-    width: 3.5rem;
-  }
+    justify-content: center;
+    position: relative;
+    width: 4rem;
+    height: 4rem;
 
-  .circular-chart {
-  max-width: 100px;
-  max-height: 100px;
-  transform: rotate(-90deg);
-  z-index: 3;
 
-  &.blur {
-    position: absolute;
-    top:0;
-    left:0;
-    z-index: 2;
-    filter: drop-shadow(0 0 4px #fff) blur(1px);  
-  }
-  
+    .content {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+        width: 3.5rem;
+    }
+
+    .circular-chart {
+        max-width: 100px;
+        max-height: 100px;
+        transform: rotate(-90deg);
+        z-index: 3;
+
+        &.blur {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            filter: drop-shadow(0 0 4px #fff) blur(1px);
+        }
+
+    }
+
+    .circle-bg {
+        fill: none;
+        stroke: #cccccc34;
+        stroke-width: 3.8;
+    }
+
+    .circle {
+        fill: none;
+        stroke-width: 2.8;
+        stroke-linecap: round;
+        stroke: #ffffff;
+        transition: stroke-dasharray 0.3s;
+        position: absolute;
+    }
 }
-
-.circle-bg {
-  fill: none;
-  stroke: #cccccc34;
-  stroke-width: 3.8;
-}
-
-.circle {
-    fill: none;
-    stroke-width: 2.8;
-    stroke-linecap: round;
-    stroke: #ffffff;
-    transition: stroke-dasharray 0.3s;
-    position: absolute;
-}
-}
-
