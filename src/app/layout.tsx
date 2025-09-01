@@ -18,6 +18,7 @@ export default function RootLayout({ children }) {
         href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&family=Manrope:wght@200..800&display=swap"
         rel="stylesheet"
       ></link>
+      <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&family=Manrope:wght@200..800&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet"></link>
       <body>{children}</body>
     </html>
   );

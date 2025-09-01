@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import HeroBg from "./hero-bg";
+import CircularSkillBar from "./components/skill-circle";
 
 type Msg = {
   role: "user" | "assistant";
@@ -40,21 +41,22 @@ export default function Home() {
 
   const projects = [
     {
-      title: "Project A",
-      when: "2020",
-      where: "Company A",
-      description: "A web application for managing tasks.",
-      techs: ["csharp", "react"],
+      title: "vProMedia",
+      when: "2022",
+      where: "Project Mark",
+      description: "Canva-like collaborative tool to craft proposals, including images and exportation to PDF",
+      techs: ["angular", "nodejs"],
       link: "https://github.com/user/project-a",
     },
     {
-      title: "Project B",
-      when: "2021",
-      where: "Company B",
-      description: "A mobile app for tracking fitness goals.",
-      techs: ["csharp", "angular"],
-      link: "https://github.com/user/project-b",
+      title: "Design+",
+      when: "2022",
+      where: "Project Mark",
+      description: "Canva-like collaborative tool to craft proposals, including images and exportation to PDF",
+      techs: ["csharp", "react"],
+      link: "https://github.com/user/project-a",
     },
+
   ];
 
   useEffect(() => {
@@ -119,7 +121,6 @@ export default function Home() {
 
   return (
     <main>
-      <HeroBg />
       <section className="hero-section flex-col">
         <div className="top flex-col">
           <img src="images/main-pic.png" alt="Main" />
@@ -155,18 +156,20 @@ export default function Home() {
       <section className="about-me">
         <div className="left">
           <div className="photo-stacks-column">
-            <img src="images/main-pic.png"></img>
-            <div className="card my-stacks">
+            <img className="dev-pic" src="images/main-pic-big.png"></img>
+            <div className="card my-stacks default">
               <div className="title-row">
-                <img src="images/code.svg" />
+                <img src="images/icons/prime_graduation-cap.svg" />
                 <h2>Stack</h2>
               </div>
               <div className="stacks-list">
                 {stacks.map((stack: any) => {
                   return (
-                    <div key={stack.code}>
+                    <div className="stack" key={stack.code}>
                       <span>{stack.title}</span>
-                      <img src={`images/${stack.code}.svg`} />
+                      <CircularSkillBar value={stack.percentage}>
+                        <img src={`images/icons/${stack.code}.svg`} />
+                      </CircularSkillBar>
                       <span>{stack.percentage}%</span>
                     </div>
                   );
@@ -177,10 +180,10 @@ export default function Home() {
         </div>
         <div className="right">
           <div className="upper">
-            <div className="about-column">
+            <div className="about-column default">
               <div className="card about-me">
                 <div className="title-row">
-                  <img src="images/user.svg" />
+                  <img src="images/icons/prime_user.svg" />
                   <h2>About Rafael</h2>
                 </div>
                 <div className="about-me content">
@@ -198,9 +201,9 @@ export default function Home() {
           </div>
           <div className="lower">
             <div className="lower-left">
-              <div className="card education-card">
+              <div className="card education-card default">
                 <div className="title-row">
-                  <img src="images/education.svg" />
+                  <img src="images/icons/prime_graduation-cap.svg" />
                   <h2>Education</h2>
                 </div>
                 <div className="education content">
@@ -209,21 +212,25 @@ export default function Home() {
                   UNIFESO - 2014 - 2018
                 </div>
               </div>
-              <div className="card experience-card">
+              <div className="card experience-card default">
                 <div className="title-row">
-                  <img src="images/experience.svg" />
+                  <img src="images/icons/prime_history.svg" />
                   <h2>Experience</h2>
                 </div>
-                <div className="experience content">
-                  <big>10+ Years</big>
-                  <button className="btn card-btn">See More</button>
+                <div className="content">
+                  <span className="experience-count">8+ Years</span>
+                  <div className="btn-row">
+                    <button className="btn card-btn btn-default">
+                      See More
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
             <div className="lower-right">
-              <div className="card projects-card">
+              <div className="card projects-card default">
                 <div className="title-row">
-                  <img src="images/projects.svg" />
+                  <img src="images/icons/prime_briefcase.svg" />
                   <h2>Projects</h2>
                 </div>
                 <div className="projects content">
@@ -241,48 +248,67 @@ export default function Home() {
                             {project.techs.map((tech: string) => (
                               <img
                                 key={tech}
-                                src={`images/${tech.toLowerCase()}.svg`}
+                                src={`images/icons/${tech.toLowerCase()}.svg`}
                                 alt={tech}
                               />
                             ))}
                           </div>
+                          <div className="description">
+                            {project.description}
+                          </div>
                         </div>
                       );
                     })}
+                  <button className="btn card-btn btn-default">See More</button>
                 </div>
-                <button className="btn card-btn">See More</button>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      <div className="projects">
+      <section className="projects">
         <div className="projects-list">
           {projects.map((exp, idx) => (
-            <div key={idx} className="experience-card">
-              <div className="experience-title">{exp.title}</div>
-              <div className="experience-where-when">{exp.where} - {exp.when}</div>
+            <div key={idx} className="experience-card default">
+              <div className="upper">
+                              <div className="experience-title">{exp.title}</div>
+              <div className="experience-where-when">
+                {exp.where} - {exp.when}
+              </div>
               <div className="experience-description">{exp.description}</div>
-              <div className="experience-techs">
+              </div>
+              <div className="lower">
+                <div className="experience-techs">
                 {exp.techs.map((tech: string) => (
-                  <img key={tech} src={`images/${tech}.svg`} alt={tech} style={{ width: '24px', height: '24px' }} />
+                  <img
+                    key={tech}
+                    src={`images/icons/${tech}.svg`}
+                    alt={tech}
+                    style={{ width: "24px", height: "24px" }}
+                  />
                 ))}
+              </div>
               </div>
             </div>
           ))}
         </div>
-      </div>
-
+      </section>
       <section className="experience">
         <div className="experience-list">
           {projects.map((exp, idx) => (
-            <div key={idx} className="experience-card">
+            <div key={idx} className="experience-card default">
               <div className="experience-title">{exp.title}</div>
-              <div className="experience-where-when">{exp.where} - {exp.when}</div>
+              <div className="experience-where-when">
+                {exp.where} - {exp.when}
+              </div>
               <div className="experience-techs">
                 {exp.techs.map((tech: string) => (
-                  <img key={tech} src={`images/${tech}.svg`} alt={tech} style={{ width: '24px', height: '24px' }} />
+                  <img
+                    key={tech}
+                    src={`images/${tech}.svg`}
+                    alt={tech}
+                    style={{ width: "24px", height: "24px" }}
+                  />
                 ))}
               </div>
               <div className="experience-description">{exp.description}</div>
@@ -295,10 +321,10 @@ export default function Home() {
       <section className="contact-me">
         <span className="big-title">Let's work together!</span>
         <form action="">
-          <input type="text" placeholder="Name" />
-          <input type="email" placeholder="Email" />
-          <input type="text" placeholder="Subject" />
-          <textarea placeholder="Message"></textarea>
+          <input className="default" type="text" placeholder="Name" />
+          <input className="default" type="email" placeholder="Email" />
+          <input className="default" type="text" placeholder="Subject" />
+          <textarea className="default" placeholder="Message"></textarea>
           <div className="form-footer">
             <div className="social-networks">
               <a href="#" className="social-network">
@@ -317,7 +343,9 @@ export default function Home() {
                 <img src="images/email.svg" alt="Email" />
               </a>
             </div>
-            <button className="btn submit-btn" type="submit">Send <img src="images/send.svg" /></button>
+            <button className="btn btn-default submit-btn" type="submit">
+              Send <img src="images/send.svg" />
+            </button>
           </div>
         </form>
       </section>
