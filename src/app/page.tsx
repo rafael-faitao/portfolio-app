@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import HeroBg from "./hero-bg";
+// import HeroBg from "./hero-bg";
 import CircularSkillBar from "./components/skill-circle";
 
 type Msg = {
@@ -20,7 +20,7 @@ export default function Home() {
     {
       title: "Angular",
       code: "angular",
-      percentage: 90,
+      percentage: 95,
     },
     {
       title: "React",
@@ -37,7 +37,35 @@ export default function Home() {
       code: "csharp",
       percentage: 75,
     },
+    {
+      title: "Angular",
+      code: "angular",
+      percentage: 95,
+    },
+    {
+      title: "React",
+      code: "react",
+      percentage: 85,
+    },
   ];
+
+  const suggestions = [
+    "How many years do you have of experience with Angular?",
+    "Do you have any experience with Python?",
+    "What's the most interesting project you've done?"
+  ];
+
+  const handleSuggestionClick = (suggestion: string) => {
+    setInput(suggestion);
+    inputRef.current?.focus();
+  };
+
+  const scrollToAboutMe = () => {
+    const aboutSection = document.querySelector('.about-me');
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   const projects = [
     {
@@ -98,6 +126,27 @@ export default function Home() {
     if (el) el.scrollTop = el.scrollHeight;
   }, [messages]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const navbar = document.querySelector('.main-navigation') as HTMLElement;
+      const heroSection = document.querySelector('.hero-section') as HTMLElement;
+      
+      if (navbar && heroSection) {
+        const heroHeight = heroSection.offsetHeight;
+        const scrollPosition = window.scrollY;
+        
+        if (scrollPosition > heroHeight - 100) {
+          navbar.classList.add('visible');
+        } else {
+          navbar.classList.remove('visible');
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   async function send() {
     const q = input.trim();
     if (!q || loading) return;
@@ -153,6 +202,24 @@ export default function Home() {
 
   return (
     <main>
+      {/* <HeroBg /> */}
+      <nav className="main-navigation">
+        <div className="nav-left">
+          <img src="images/main-pic.png" alt="Rafael Faitão" className="nav-avatar" />
+          <div className="nav-info">
+            <h3>Rafael Faitão</h3>
+            <span>Full-Stack Engineer</span>
+          </div>
+        </div>
+        <div className="nav-right">
+          <a href="#home" className="nav-link">Home</a>
+          <a href="#about" className="nav-link active">About Me</a>
+          <a href="#projects" className="nav-link">Projects</a>
+          <a href="#experience" className="nav-link">Experience</a>
+          <a href="#contact" className="nav-link">Contact Me</a>
+        </div>
+      </nav>
+      
       <section className="hero-section flex-col">
         <div className="top flex-col">
           <img src="images/main-pic.png" alt="Main" />
@@ -160,11 +227,26 @@ export default function Home() {
           <span>Full-stack Engineer</span>
         </div>
         <span className="main-line">&gt;_ Let's build something together</span>
-        <div className="prompt flex-col">
+        <div className="chat-container">
+          <div className="chat-header">
+            <img src="images/icons/ai-icon.svg" alt="AI" className="ai-icon" />
+            <span>IA Assistance</span>
+          </div>
+          <div className="chat-suggestions">
+            {suggestions.map((suggestion, index) => (
+              <div 
+                key={index} 
+                className="suggestion" 
+                onClick={() => handleSuggestionClick(suggestion)}
+              >
+                {suggestion}
+              </div>
+            ))}
+          </div>
           <div className="inputarea">
             <input
               className="prompt-input"
-              placeholder="Ask anything about Rafael"
+              placeholder="Ask something about Ralph"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKey}
@@ -183,119 +265,116 @@ export default function Home() {
             ))}
           </pre>
         </div>
+        <div className="see-more-container">
+          <button className="see-more-btn" onClick={scrollToAboutMe}>
+            <span>See More</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 10L12 15L17 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </div>
       </section>
 
       <section className="about-me">
-        <div className="left">
-          <div className="photo-stacks-column">
-            <img className="dev-pic" src="images/main-pic-big.png"></img>
-            <div className="card my-stacks default">
+        <div className="about-content">
+          <div className="left">
+            <img className="main-profile-pic" src="images/main-pic-big.png" alt="Rafael Faitão" />
+            <div className="card stack-card default">
               <div className="title-row">
                 <img src="images/icons/prime_graduation-cap.svg" />
                 <h2>Stack</h2>
               </div>
-              <div className="stacks-list">
+              <div className="stacks-grid">
                 {stacks.map((stack: any) => {
                   return (
-                    <div className="stack" key={stack.code}>
-                      <span>{stack.title}</span>
-                      <CircularSkillBar value={stack.percentage}>
-                        <img src={`images/icons/${stack.code}.svg`} />
-                      </CircularSkillBar>
-                      <span>{stack.percentage}%</span>
+                    <div className="stack-item" key={stack.code}>
+                      <div className="stack-circle">
+                        <CircularSkillBar value={stack.percentage}>
+                          <img src={`images/icons/${stack.code}.svg`} />
+                        </CircularSkillBar>
+                      </div>
+                      <span className="stack-name">{stack.title}</span>
+                      <span className="stack-percentage">{stack.percentage}%</span>
                     </div>
                   );
                 })}
               </div>
             </div>
           </div>
-        </div>
-        <div className="right">
-          <div className="upper">
-            <div className="about-column default">
-              <div className="card about-me">
-                <div className="title-row">
-                  <img src="images/icons/prime_user.svg" />
-                  <h2>About Rafael</h2>
-                </div>
-                <div className="about-me content">
-                  Fullstack Engineer with 10+ years of experience building
-                  scalable applications across healthcare, media, and AEC
-                  industries. Specialized in Angular (8+ years) and Node.js (8+
-                  years) with a strong focus on UX design, performance
-                  optimization, and leading cross-functional teams. Proven
-                  success delivering enterprise-grade systems and collaborating
-                  remotely with international stakeholders. Fluent in English,
-                  open to US/EU remote roles.
-                </div>
+          
+          <div className="right">
+            <div className="card about-card default">
+              <div className="title-row">
+                <img src="images/icons/prime_user.svg" />
+                <h2>About Rafael</h2>
+              </div>
+              <div className="about-text">
+                Fullstack Engineer with 10+ years of experience building
+                scalable applications across healthcare, media, and AEC
+                industries. Specialized in Angular (8+ years) and Node.js (8+
+                years) with a strong focus on UX design, performance
+                optimization, and leading cross-functional teams. Proven
+                success delivering enterprise-grade systems and collaborating
+                remotely with international stakeholders. Fluent in English,
+                open to US/EU remote roles.
               </div>
             </div>
-          </div>
-          <div className="lower">
-            <div className="lower-left">
+            
+            <div className="cards-row">
               <div className="card education-card default">
                 <div className="title-row">
                   <img src="images/icons/prime_graduation-cap.svg" />
                   <h2>Education</h2>
                 </div>
-                <div className="education content">
-                  Bachelor's Degree in Computer Science
-                  <br />
-                  UNIFESO - 2014 - 2018
+                <div className="education-content">
+                  <div className="degree">Bachelor's Degree in Computer Science</div>
+                  <div className="institution">UNIFESO - 2014 - 2018</div>
                 </div>
               </div>
+
               <div className="card experience-card default">
                 <div className="title-row">
                   <img src="images/icons/prime_history.svg" />
                   <h2>Experience</h2>
                 </div>
-                <div className="content">
-                  <span className="experience-count">8+ Years</span>
-                  <div className="btn-row">
-                    <button className="btn card-btn btn-default">
-                      See More
-                    </button>
-                  </div>
+                <div className="experience-content">
+                  <div className="experience-years">+10 Years</div>
+                  <button className="see-more-btn">See More</button>
                 </div>
               </div>
             </div>
-            <div className="lower-right">
-              <div className="card projects-card default">
-                <div className="title-row">
-                  <img src="images/icons/prime_briefcase.svg" />
-                  <h2>Projects</h2>
-                </div>
-                <div className="projects content">
-                  {projects.length > 1 &&
-                    projects.slice(0, 2).map((project: any) => {
-                      return (
-                        <div className="project-card" key={project.title}>
-                          <div className="title">{project.title}</div>
-                          <div className="where-and-when">
-                            <span>
-                              {project.where} - {project.when}
-                            </span>
-                          </div>
-                          <div className="techs-row">
-                            {project.techs.map((tech: string) => (
-                              <img
-                                key={tech}
-                                src={`images/icons/${tech.toLowerCase()}.svg`}
-                                alt={tech}
-                              />
-                            ))}
-                          </div>
-                          <div className="description">
-                            {project.description}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  <button className="btn card-btn btn-default">See More</button>
-                </div>
+
+            <div className="card projects-preview-card default">
+              <div className="title-row">
+                <img src="images/icons/prime_briefcase.svg" />
+                <h2>Projects</h2>
+              </div>
+              <div className="projects-preview">
+                {projects.slice(0, 2).map((project: any, index: number) => (
+                  <div className="project-item" key={index}>
+                    <div className="project-name">{project.title}</div>
+                    <div className="project-company">{project.where} - {project.when}</div>
+                    <div className="project-techs">
+                      {project.techs.map((tech: string) => (
+                        <img key={tech} src={`images/icons/${tech}.svg`} alt={tech} />
+                      ))}
+                    </div>
+                    <div className="project-description">{project.description}</div>
+                  </div>
+                ))}
+                <button className="see-more-btn">See More</button>
               </div>
             </div>
           </div>
+        </div>
+        
+        <div className="section-navigation">
+          <button className="section-nav-btn" onClick={() => document.querySelector('.projects')?.scrollIntoView({ behavior: 'smooth' })}>
+            <span>Projects</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 10L12 15L17 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
         </div>
       </section>
       <section className="projects">
