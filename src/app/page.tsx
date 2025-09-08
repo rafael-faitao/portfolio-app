@@ -1,4 +1,23 @@
-"use client";
+"use client";  
+  // Tech code to full name mapping
+  const techNames: Record<string, string> = {
+    angular: 'Angular',
+    react: 'React',
+    nodejs: 'Node.js',
+    nestjs: 'NestJS',
+    js: 'JavaScript',
+    csharp: 'C#',
+    openai: 'OpenAI',
+    vue: 'Vue.js',
+    unity: 'Unity',
+    metaquest: 'Meta Quest',
+    arduino: 'Arduino',
+    'c++': 'C++',
+    google_maps: 'Google Maps API',
+    graph_api: 'Facebook Graph API',
+    scrum: 'Agile Scrum',
+  };
+
 
 import { useState, useRef, useEffect } from "react";
 // import HeroBg from "./hero-bg";
@@ -32,32 +51,27 @@ export default function Home() {
     {
       title: "Angular",
       code: "angular",
-      percentage: 95,
+      percentage: 90,
     },
     {
       title: "React",
       code: "react",
-      percentage: 85,
+      percentage: 70,
     },
     {
       title: "Node.js",
       code: "nodejs",
-      percentage: 80,
+      percentage: 70,
+    },
+    {
+      title: "Javascript",
+      code: "js",
+      percentage: 60,
     },
     {
       title: "C#",
       code: "csharp",
-      percentage: 75,
-    },
-    {
-      title: "Angular",
-      code: "angular",
-      percentage: 95,
-    },
-    {
-      title: "React",
-      code: "react",
-      percentage: 85,
+      percentage: 60,
     },
   ];
 
@@ -82,51 +96,46 @@ export default function Home() {
   const projects = [
     {
       title: "vProMedia",
-      when: "2022",
-      where: "Project Mark",
-      description: "Canva-like collaborative tool to craft proposals, including images and exportation to PDF. This comprehensive platform revolutionizes the way teams create professional proposals. Built with Angular and Node.js, it features real-time collaboration, drag-and-drop interface, advanced image editing capabilities, and seamless PDF generation. The application includes user authentication, project management, template library, and cloud storage integration. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      techs: ["angular", "nodejs"],
-      link: "https://github.com/user/project-a",
+      when: "2023",
+      where: "vCreative",
+      description: "Multimedia Radio and TV Managing system, focused on spot creation, scripiting, and organization for several US-based Radio Companies.",
+      techs: ["angular", "nodejs", "nestjs"],
     },
     {
       title: "Design+",
       when: "2022",
       where: "Project Mark",
       description: "Canva-like collaborative tool to craft proposals, including images and exportation to PDF. An innovative design platform that empowers creative teams with advanced collaboration features. Developed using C# and React, this tool provides comprehensive design capabilities, version control, asset management, and team workflow optimization. The system includes real-time editing, comment systems, approval workflows, and enterprise-grade security. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      techs: ["csharp", "react"],
-      link: "https://github.com/user/project-a",
+      techs: ["nodejs", "react", "vue"],
     },
     {
-      title: "vProMedia",
-      when: "2022",
-      where: "Project Mark",
-      description: "Canva-like collaborative tool to craft proposals, including images and exportation to PDF. Advanced proposal creation platform with cutting-edge features for modern businesses. The application leverages Angular's powerful framework and Node.js backend to deliver exceptional performance and user experience. Features include template marketplace, brand management, analytics dashboard, and API integrations. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      techs: ["angular", "nodejs"],
-      link: "https://github.com/user/project-a",
+      title: "Medisigh",
+      when: "2020",
+      where: "Medisigh LTDA",
+      description: "Multifunction healthcare managing system, targeting plastic surgeons and other asthetic professionals. Includes patient, document, appointment handling, as well as advanced attendance systems that integrate with modern AI technologies.",
+      techs: ["angular", "nodejs", "openai", "scrum"],
+      link: "http://medisigh.com.br/",
     },
     {
-      title: "Design+",
-      when: "2022",
-      where: "Project Mark",
-      description: "Canva-like collaborative tool to craft proposals, including images and exportation to PDF. Professional design suite that combines creativity with efficiency. Built with robust C# architecture and modern React frontend, this platform serves enterprise clients with complex design needs. The system features advanced permissions, audit trails, custom branding, and seamless integration with popular business tools. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      techs: ["csharp", "react"],
-      link: "https://github.com/user/project-a",
+      title: "SojaVR Experience",
+      when: "2019",
+      where: "Imago 360",
+      description: "Virtual Reality experience for agriculture, allowing users to explore and learn about soybean farming in an immersive 3D environment. Developed using Unity and C#, this application provides interactive simulations, educational content, and real-time data visualization to enhance understanding of modern agricultural practices.",
+      techs: ["csharp", "unity", "metaquest"],
     },
     {
-      title: "vProMedia",
-      when: "2022",
-      where: "Project Mark",
-      description: "Canva-like collaborative tool to craft proposals, including images and exportation to PDF. Next-generation collaborative platform designed for modern workflow optimization. Utilizing Angular's component-based architecture and Node.js microservices, this solution provides scalable, secure, and user-friendly proposal creation experience. Key features include AI-powered suggestions, automated formatting, multi-language support, and comprehensive analytics.",
-      techs: ["angular", "nodejs"],
-      link: "https://github.com/user/project-a",
+      title: "AirTouch",
+      when: "2018",
+      where: "UNIFESO (College)",
+      description: "Software + Hardware haptics kit, developed combining Arduino with Unity Engine to deliver interactive experiences with gaming and computer applications overall",
+      techs: ["c++", "arduino", "unity"],
     },
     {
-      title: "Design+",
-      when: "2022",
-      where: "Project Mark",
-      description: "Canva-like collaborative tool to craft proposals, including images and exportation to PDF. Comprehensive design and collaboration ecosystem for creative professionals. Powered by C#'s robust backend capabilities and React's dynamic frontend, this platform delivers enterprise-level functionality with intuitive user experience. The application includes project management, client collaboration portals, automated backup systems, and extensive customization options.",
-      techs: ["csharp", "react"],
-      link: "https://github.com/user/project-a",
+      title: "Social Maps",
+      when: "2017",
+      where: "(College Project)",
+      description: "Interactive Web Application using Google Maps API, Facebook Graph API, Data Scrapping and other technologies to display events and interesting to-dos in a map interface.",
+      techs: ["nodejs", "angular", "google_maps", "graph_api"],
     },
 
   ];
@@ -706,7 +715,12 @@ export default function Home() {
                       <div className="project-company">{project.where} - {project.when}</div>
                       <div className="project-techs">
                         {project.techs.map((tech: string) => (
-                          <img key={tech} src={`images/icons/${tech}.svg`} alt={tech} />
+                          <img
+                            key={tech}
+                            src={`images/icons/${tech}.svg`}
+                            alt={tech}
+                            title={techNames[tech] || tech}
+                          />
                         ))}
                       </div>
                       <div className="project-description">{project.description}</div>
@@ -761,6 +775,7 @@ export default function Home() {
                       key={tech}
                       src={`images/icons/${tech}.svg`}
                       alt={tech}
+                      title={techNames[tech] || tech}
                     />
                   ))}
                 </div>
@@ -810,6 +825,7 @@ export default function Home() {
                             src={`images/icons/${tech}.svg`}
                             alt={tech}
                             className="tech-icon"
+                            title={techNames[tech] || tech}
                           />
                         ))}
                       </div>
