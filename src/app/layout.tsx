@@ -8,6 +8,7 @@ import "./globals.scss";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <link rel="icon" type="image/svg+xml" href="/images/icons/favicon.svg" />
       <link rel="preconnect" href="https://fonts.googleapis.com"></link>
       <link
         rel="preconnect"
