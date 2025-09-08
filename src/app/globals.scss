@@ -496,6 +496,8 @@ section {
         padding: 1.5rem;
         position: relative;
         min-height: 25rem;
+        display:flex;
+        flex-direction: column;
         
         @media (max-width: 1024px) {
             width: 70%;
@@ -583,7 +585,9 @@ section {
             max-height: 15rem;
             overflow-y: auto;
             scrollbar-width: none;
+            text-wrap: auto;
             margin-bottom: 1rem;
+            flex:1;
             
             @media (max-width: 768px) {
                 max-height: 12rem;
@@ -623,11 +627,10 @@ section {
             width: 100%;
             align-items: center;
             gap: 0.5rem;
-            position: absolute;
             bottom: 1.5rem;
             left: 1.5rem;
             right: 1.5rem;
-            width: calc(100% - 3rem);
+            width: 100%;
             
             @media (max-width: 768px) {
                 bottom: 1rem;
