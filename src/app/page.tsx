@@ -144,58 +144,209 @@ export default function Home() {
     },
   ];
 
-  const experiences = [
-    {
-      title: "Senior Full Stack Developer",
-      company: "Rtech Brasil",
-      period: "2023 - Present",
-      startYear: "2023",
-      endYear: "2025",
-      description:
-        "Leading development of enterprise applications using Angular, React, and .NET. Architecting scalable solutions for e-commerce and business systems.",
-      techs: ["angular", "react", "nodejs", "csharp"],
-    },
-    {
-      title: "Full Stack Developer",
-      company: "Project Mark",
-      period: "2022 - 2023",
-      startYear: "2022",
-      endYear: "2023",
-      description:
-        "Developed collaborative tools and modern web applications. Specialized in creating user-friendly interfaces and robust backend systems.",
-      techs: ["angular", "nodejs", "csharp"],
-    },
-    {
-      title: "Frontend Developer",
-      company: "Freelancer",
-      period: "2020 - 2022",
-      startYear: "2020",
-      endYear: "2022",
-      description:
-        "Created responsive and modern interfaces for various clients. Focused on performance optimization and exceptional user experience.",
-      techs: ["react", "angular", "nodejs"],
-    },
-    {
-      title: "Bachelor's Degree Completion",
-      company: "UNIFESO",
-      period: "2018",
-      startYear: "2018",
-      endYear: "2018",
-      description:
-        "Graduated with Bachelor's Degree in Computer Science. Presented final thesis project showcasing full-stack development skills and modern web technologies.",
-      techs: ["angular", "nodejs"],
-    },
-    {
-      title: "Computer Science Studies",
-      company: "UNIFESO",
-      period: "2014 - 2018",
-      startYear: "2014",
-      endYear: "2018",
-      description:
-        "Started Computer Science degree at UNIFESO. Built strong foundation in programming, algorithms, data structures, and software engineering principles.",
-      techs: ["csharp", "nodejs"],
-    },
-  ];
+
+    const experiences = [
+  {
+    title: "Started Computer Science degree at UNIFESO",
+    company: "UNIFESO",
+    period: "2014",
+    year: 2014,
+    month: 1,
+    description:
+      "Began Computer Science studies. Built strong foundations in programming, algorithms, and software engineering principles.",
+    techs: ["csharp", "nodejs"],
+  },
+  {
+    title: "Started internship at AlterData Software",
+    company: "AlterData Software",
+    period: "2016",
+    year: 2016,
+    month: 4,
+    description:
+      "Joined as an intern developer, working on software development and internal systems while studying Computer Science.",
+    techs: ["csharp", "sql", "angular"],
+  },
+  {
+    title: "Created first game: Pac-Man clone",
+    company: "Personal Project",
+    period: "2016",
+    year: 2016,
+    month: 6,
+    description:
+      "Built a Pac-Man clone in C++ using GLUT (OpenGL). Learned about game loops, graphics rendering, and memory management.",
+    techs: ["c++",],
+  },
+  {
+    title: "Developed SocialMaps project",
+    company: "UNIFESO",
+    period: "2017",
+    year: 2017,
+    month: 1,
+    description:
+      "Created SocialMaps, integrating Google Maps API and Facebook Graph API to show nearby events on an interactive map.",
+    techs: ["js", "google_maps", "graph_api"],
+  },
+  {
+    title: "Left internship at AlterData Software",
+    company: "AlterData Software",
+    period: "2017",
+    year: 2017,
+    month: 5,
+    description:
+      "Concluded internship after 2 years of hands-on experience with professional development practices.",
+    techs: ["csharp", "sql"],
+  },
+  {
+    title: "Created Animal Mistreatment (AmarPet)",
+    company: "Personal Project",
+    period: "2018",
+    year: 2018,
+    month: 10,
+    description:
+      "Built AmarPet, an application to raise awareness about animal mistreatment. Focused on mobile UX and backend integration.",
+    techs: ["ionic", "nodejs"],
+  },
+  {
+    title: "Graduated in Computer Science",
+    company: "UNIFESO",
+    period: "2018",
+    year: 2018,
+    month: 12,
+    description:
+      "Graduated with a Bachelor's Degree in Computer Science. Presented thesis project demonstrating full-stack development and modern web technologies.",
+    techs: ["angular", "nodejs", "csharp"],
+  },
+  {
+    title: "Created AirTouch project",
+    company: "UNIFESO",
+    period: "2018",
+    year: 2018,
+    month: 6,
+    description:
+      "Developed AirTouch, a hardware + software haptic device for hand-movement interactions using Arduino sensors and Unity desktop application.",
+    techs: ["arduino", "csharp", "unity", "c++"],
+  },
+  {
+    title: "Created Joe Immortal (platformer game)",
+    company: "Personal Project",
+    period: "",
+    year: 2019,
+    month: 7,
+    description:
+      "Developed Joe Immortal, a 2D platformer built in Unity. Focused on level design, platforming mechanics, combat systems, and character progression.",
+    techs: ["unity", "csharp",],
+  },
+  {
+    title: "Started Soja VR project",
+    company: "Tecnomyl",
+    period: "2019",
+    year: 2019,
+    month: 1,
+    description:
+      "Developed Soja VR, a Unity VR simulation for agronomy training where users spray weeds in a soy field. Showcased at an agronomics convention in 2020.",
+    techs: ["unity", "csharp", "metaquest"],
+  },
+  {
+    title: "Started freelancing career",
+    company: "Freelancer",
+    period: "2018 - Current",
+    year: 2018,
+    month: 1,
+    description:
+      "Delivered web and mobile applications for various clients. Specialized in Angular, React, and Node.js solutions with focus on performance and UX.",
+    techs: ["angular", "react", "nodejs", "ionic"],
+  },
+  {
+    title: "Started in Medisigh project",
+    company: "Medisigh",
+    period: "2020 - current",
+    year: 2020,
+    month: 1,
+    description:
+      "Created the brand and initial system. Led frontend development, implemented Scrum, and contributed to product decisions balancing client expectations and deliverables.",
+    techs: ["angular", "nodejs", "csharp"],
+  },
+  {
+    title: "Started Orbtask project",
+    company: "Orbtask",
+    period: "",
+    year: 2016,
+    month: 10,
+    description:
+      "Designed and developed Orbtask, a task management and productivity tool concept with clean UX, modular architecture, and experiments in real-time features.",
+    techs: ["angular", "nodejs", "websocket"],
+  },
+  {
+  title: "Founded Ninestacks project",
+  company: "Ninestacks",
+  period: "2023 - current",
+  year: 2023,
+  month: 9,
+  description:
+    "Founded Ninestacks, a Duolingo-like app designed to teach programming through gamified exercises. Built the system foundation and managed branding.",
+},
+{
+  title: "Started Digicriativa collaboration",
+  company: "Digicriativa",
+  period: "",
+  year: 2020,
+  month: 1,
+  description:
+    "Worked on digital solutions and consulting projects for local clients. Contributed to web development and UI design initiatives.",
+  techs: ["angular", "react", "nodejs"],
+},
+{
+  title: "Started at Radix as Software Engineer",
+  company: "Radix",
+  period: "2021 - 2022",
+  year: 2021,
+  month: 1,
+  description:
+    "Joined Radix to work on enterprise systems and software development. Focused on scalable backend solutions and modern frontend stacks.",
+  techs: ["csharp", "angular", "nodejs", "react"],
+},
+{
+  title: "Joined Project Mark as Full-Stack Developer",
+  company: "Project Mark",
+  period: "2022",
+  year: 2022,
+  month: 1,
+  description:
+    "Joined Project Mark, my first US-based company (San Francisco Bay Area), working in the AEC (Architecture, Engineering & Construction) / Civil Construction industry. Contributed as a Full-Stack Developer across multiple projects. Frontend focused on React, Vue.js, Vuex, and Redux. Backend experience with Node.js and TypeORM.",
+  techs: ["react", "vue", "nodejs"],
+},
+{
+  title: "Worked on DesignPlus at Project Mark",
+  company: "Project Mark",
+  period: "May 2022",
+  year: 2022,
+  month: 5,
+  description:
+    "Worked on DesignPlus, an interactive Canva-like web app with real-time collaboration on PDFs, allowing multiple users to edit simultaneously. First exposure to Redux-based approaches and component stores. Considered a major milestone in expanding frontend expertise and handling complex collaborative design systems.",
+  techs: ["react", "vue", "nodejs",],
+},
+{
+  title: "Started at vCreative as Software Engineer",
+  company: "vCreative",
+  period: "2022 - 2025",
+  year: 2022,
+  month: 11,
+  description:
+    "Contributed to the development of media and advertising workflow solutions. Worked on improving system performance and integrating new features.",
+  techs: ["nodejs", "js", "angular"],
+},
+{
+  title: "Developed Patient Evolution at Medisigh",
+  company: "Medisigh",
+  period: "February 2025",
+  year: 2025,
+  month: 2,
+  description:
+    "Built Patient Evolution. Integrated with OpenAI API to introduce advanced AI-powered healthcare features. Enabled real-time audio transcription of patient-doctor conversations and automatic extraction of relevant details (allergies, complaints, objectives). Marked a major milestone in applying AI for transcription and semantic identification in healthcare applications.",
+  techs: ["angular", "nodejs", "openai", "websocket"],
+}
+
+];
 
   const visibleExperiences = showAllExperiences
     ? experiences
@@ -203,10 +354,13 @@ export default function Home() {
 
   // Generate timeline items with year markers and cards positioned between years
   const generateTimelineItems = () => {
-    const allYears = ["2025", "2023", "2022", "2020", "2018", "2014"];
+    let allYears = [];
+    experiences.map((exp) => exp.year).forEach((y) => {if (!allYears.includes(y)) allYears.push(y)});
+    allYears.sort().reverse();
     const items = [];
     let cardIndex = 0; // Global card counter for alternating positions
 
+    experiences.sort((a, b) => b.year - a.year);
     for (let i = 0; i < allYears.length; i++) {
       const year = allYears[i];
 
@@ -221,14 +375,14 @@ export default function Home() {
       if (i < allYears.length - 1) {
         const nextYear = allYears[i + 1];
         const experiencesInPeriod = visibleExperiences.filter(
-          (exp) => exp.startYear === nextYear && exp.endYear === year
+          (exp) => exp.year === year
         );
 
         experiencesInPeriod.forEach((exp) => {
           items.push({
             type: "experience",
             experience: exp,
-            key: `exp-${exp.startYear}-${exp.endYear}-${cardIndex}`,
+            key: `exp-${exp.year}-${cardIndex}`,
             position: cardIndex % 2 === 0 ? "left" : "right",
           });
           cardIndex++; // Increment global card counter
@@ -1020,6 +1174,7 @@ export default function Home() {
                       <div className="experience-description">
                         {exp.description}
                       </div>
+                      { exp.techs && (
                       <div className="experience-techs">
                         {exp.techs.map((tech: string) => (
                           <img
@@ -1031,6 +1186,7 @@ export default function Home() {
                           />
                         ))}
                       </div>
+                      )}
                     </div>
                     <div className="timeline-tick"></div>
                   </div>
