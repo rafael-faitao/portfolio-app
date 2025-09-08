@@ -913,9 +913,9 @@ export default function Home() {
               className={`experience-card default ${
                 expandedProject === idx ? "expanded-card" : ""
               }`}
-              onClick={() =>
+              /*onClick={() =>
                 expandedProject === null ? handleProjectExpand(idx) : undefined
-              }
+              }*/
               style={{
                 cursor: expandedProject === null ? "pointer" : "default",
               }}
