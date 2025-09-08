@@ -39,7 +39,7 @@ export default function Home() {
   });
   const [formLoading, setFormLoading] = useState(false);
   const [formStatus, setFormStatus] = useState("");
-  const [showAllExperiences, setShowAllExperiences] = useState(false);
+  const [showAllExperiences, setShowAllExperiences] = useState(true);
   const [activeSection, setActiveSection] = useState("home");
   const [expandedProject, setExpandedProject] = useState<number | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -354,42 +354,34 @@ export default function Home() {
 
   // Generate timeline items with year markers and cards positioned between years
   const generateTimelineItems = () => {
-    let allYears = [];
-    experiences.map((exp) => exp.year).forEach((y) => {if (!allYears.includes(y)) allYears.push(y)});
-    allYears.sort().reverse();
+    // Get all unique years from experiences
+    const allYears = Array.from(new Set(experiences.map((exp) => exp.year)));
+    allYears.sort((a, b) => b - a); // Descending order
     const items = [];
-    let cardIndex = 0; // Global card counter for alternating positions
+    let cardIndex = 0;
 
-    experiences.sort((a, b) => b.year - a.year);
     for (let i = 0; i < allYears.length; i++) {
       const year = allYears[i];
-
       // Add year marker
       items.push({
         type: "year",
         year: year,
         key: `year-${year}`,
       });
+      // Add all experiences for this year
+      const experiencesInYear = visibleExperiences.filter((exp) => exp.year === year);
+            experiencesInYear.sort((a, b) => b.month - a.month); // Sort by month within the year
 
-      // Find experiences that span from this year to the next
-      if (i < allYears.length - 1) {
-        const nextYear = allYears[i + 1];
-        const experiencesInPeriod = visibleExperiences.filter(
-          (exp) => exp.year === year
-        );
-
-        experiencesInPeriod.forEach((exp) => {
-          items.push({
-            type: "experience",
-            experience: exp,
-            key: `exp-${exp.year}-${cardIndex}`,
-            position: cardIndex % 2 === 0 ? "left" : "right",
-          });
-          cardIndex++; // Increment global card counter
+      experiencesInYear.forEach((exp) => {
+        items.push({
+          type: "experience",
+          experience: exp,
+          key: `exp-${exp.year}-${cardIndex}`,
+          position: cardIndex % 2 === 0 ? "left" : "right",
         });
-      }
+        cardIndex++;
+      });
     }
-
     return items;
   };
 
@@ -1195,7 +1187,7 @@ export default function Home() {
             })}
           </div>
 
-          {experiences.length > 2 && (
+          {false && experiences.length > 2 && (
             <div className="experience-expand-container">
               <button
                 className="experience-expand-btn"
