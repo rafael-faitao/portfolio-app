@@ -16,7 +16,7 @@ Bachelor in Computer Science (2014–2018)
 ---
 
 ## Technical Skills
-- **Frontend:** Angular 2+, React.js, Vue.js, Ionic, Tailwind CSS, Bootstrap, HTML5, CSS3, JavaScript, TypeScript  
+- **Frontend:** Angular 2+, React.js, Vue.js, Ionic, Tailwind CSS, Bootstrap, HTML5, CSS3, JavaScript, TypeScript, Vuex  
 - **Backend:** Node.js (Express, NestJS), C#/.NET Core  
 - **Databases:** MySQL, PostgreSQL, MongoDB  
 - **DevOps & Cloud:** Docker, CI/CD, Azure, AWS Lambda, S3  
@@ -84,6 +84,18 @@ Bachelor in Computer Science (2014–2018)
 
 ---
 
+### Orbis Produções (Teresópolis, Brazil)
+** Graphic Designer / Videomaker ** (2014-2019)
+
+- Freelancer Graphic Designer and Videomaker
+- Often Working with Music Artists
+
+### The English House (Teresópolis, Brazil)
+** English Teacher** (2012-2013)
+
+- First professional opportunity
+- Teached basic English students
+
 ## Independent Projects & Volunteer Work
 - **Independent Software Developer** (2016–Present): Built web, mobile, VR apps using Angular, Node.js, Unity, Ionic, and C#.
 - **Ninecamp – Volunteer Instructor** (2016–Present): Taught programming fundamentals (C, JavaScript, HTML, CSS, PostgreSQL) to beginners. Mentored students in building real-world projects.
@@ -95,3 +107,30 @@ Bachelor in Computer Science (2014–2018)
 - English (Fluent)
 - Spanish (Basic)
 - French (Basic)
+
+## Independent Projects & Milestones
+- **Pac-Man Clone** (2016): First game, built in **C++ with GLUT (OpenGL devkit)**.
+- **OrbTask** (2016): Freelancer management system built with **AngularJS, Node.js/Express, PostgreSQL**.
+- **SocialMaps** (2017): College project integrating **Google Maps API, Facebook Graph API (Meta API), data scraping** for event mapping.
+- **AirTouch** (2018): Final Computer Science project — **haptic device** combining Arduino hardware (accelerometers, potentiometers, gyroscopes) with Unity/C# desktop app filtering sensor signals.
+- **Animal Mistreatment Reporting App Prototype** (2018): Built with **Ionic + TypeScript (frontend)** and **PostgreSQL (backend)**.
+- **Graduated in Computer Science** (2018).
+- **Soja VR** (2019, showcased 2020): Unity VR agronomy simulation for **Technomial**, spraying weeds in soy fields.
+- **Joe Immortal** (2019–2020): Retro 3D platformer tribute to **Pac-Man World, Rayman, Crash, Banjo-Kazooie**. Lost to a **hard drive failure in June 2020**.
+- **COVID-19 Pivot** (2020): Paused video/graphic design career to focus on programming/IT.
+- **Ninestacks Mentorship** (Apr 2024): Mentored juniors on fundamentals and **AngularJS, SCSS, HTML, JavaScript**.
+- **Ninestacks (Founder/CEO)** (Sep 2023 – Present): Founded edtech startup teaching programming like Duolingo teaches languages. Role as **investor/visionary/CEO**, not active dev work.
+
+## Trivia
+- Rafael is 1,80m tall
+- Rafael goes to the gym everyday
+- Rafael is a big Michael Jackson fan, it's his undisputed biggest inspiration in life
+- Rafael plays the keyboard, the acoustic guitar and does amateur music producing
+- Rafael taught street dance during his teen years
+- Rafael was born on May 20th, 1995
+- Rafael loves art. His favorite painters are Zdzislaw Beksinski and Van Gogh
+- Rafael was originally going to college for Literature and Portuguese, but changed his mind
+
+## Professional Trivia
+- Rafael is a jack-of-all-trades. He likes to explore and compare similar technologies.
+- Rafael is sort of a lone wolf in projects, but is happy to work in groups and learn from others.
