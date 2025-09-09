@@ -113,7 +113,7 @@ Bachelor in Computer Science (2014–2018)
 - **OrbTask** (2016): Freelancer management system built with **AngularJS, Node.js/Express, PostgreSQL**.
 - **SocialMaps** (2017): College project integrating **Google Maps API, Facebook Graph API (Meta API), data scraping** for event mapping.
 - **AirTouch** (2018): Final Computer Science project — **haptic device** combining Arduino hardware (accelerometers, potentiometers, gyroscopes) with Unity/C# desktop app filtering sensor signals.
-- **Animal Mistreatment Reporting App Prototype** (2018): Built with **Ionic + TypeScript (frontend)** and **PostgreSQL (backend)**.
+- **Animal Mistreatment Reporting (Amarpet) App Prototype** (2018): Built with **Ionic + TypeScript (frontend)** and **PostgreSQL (backend)**.
 - **Graduated in Computer Science** (2018).
 - **Soja VR** (2019, showcased 2020): Unity VR agronomy simulation for **Technomial**, spraying weeds in soy fields.
 - **Joe Immortal** (2019–2020): Retro 3D platformer tribute to **Pac-Man World, Rayman, Crash, Banjo-Kazooie**. Lost to a **hard drive failure in June 2020**.

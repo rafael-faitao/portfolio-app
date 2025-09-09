@@ -157,8 +157,8 @@ export default function Home() {
     techs: ["csharp", "nodejs"],
   },
   {
-    title: "Started internship at AlterData Software",
-    company: "AlterData Software",
+    title: "Started internship at Mark Software",
+    company: "Alterdata Software",
     period: "2016",
     year: 2016,
     month: 4,
@@ -187,8 +187,8 @@ export default function Home() {
     techs: ["js", "google_maps", "graph_api"],
   },
   {
-    title: "Left internship at AlterData Software",
-    company: "AlterData Software",
+    title: "Left internship at Alterdata Software",
+    company: "Alterdata Software",
     period: "2017",
     year: 2017,
     month: 5,
@@ -197,13 +197,13 @@ export default function Home() {
     techs: ["csharp", "sql"],
   },
   {
-    title: "Created Animal Mistreatment (AmarPet)",
+    title: "Created Animal Protection Report App (AmarPet)",
     company: "Personal Project",
     period: "2018",
     year: 2018,
     month: 10,
     description:
-      "Built AmarPet, an application to raise awareness about animal mistreatment. Focused on mobile UX and backend integration.",
+      "Built AmarPet, an MVP application to raise awareness about animal mistreatment. Focused on mobile UX and backend integration.",
     techs: ["ionic", "nodejs"],
   },
   {
@@ -268,13 +268,13 @@ export default function Home() {
   },
   {
     title: "Started Orbtask project",
-    company: "Orbtask",
-    period: "",
+    company: "(Personal Project)",
+    period: "2016",
     year: 2016,
     month: 10,
     description:
       "Designed and developed Orbtask, a task management and productivity tool concept with clean UX, modular architecture, and experiments in real-time features.",
-    techs: ["angular", "nodejs", "websocket"],
+    techs: ["angular", "nodejs", "websocket", "sql"],
   },
   {
   title: "Founded Ninestacks project",
