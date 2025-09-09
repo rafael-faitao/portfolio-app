@@ -193,7 +193,7 @@ export default function Home() {
     year: 2017,
     month: 5,
     description:
-      "Concluded internship after 2 years of hands-on experience with professional development practices.",
+      "Concluded internship after 1 year of hands-on experience with professional development practices.",
     techs: ["csharp", "sql"],
   },
   {
@@ -653,11 +653,11 @@ export default function Home() {
         <div className="nav-left">
           <img
             src="images/main-pic.png"
-            alt="Rafael Faitão"
+            alt="Rafael Oliveira"
             className="nav-avatar"
           />
           <div className="nav-info">
-            <h3>Rafael Faitão</h3>
+            <h3>Rafael Oliveira</h3>
             <span>Full-Stack Engineer</span>
           </div>
         </div>
@@ -842,7 +842,7 @@ export default function Home() {
       <section id="home" className="hero-section flex-col">
         <div className="top flex-col">
           <img src="images/main-pic.png" alt="Main" />
-          <h1>Rafael Faitão</h1>
+          <h1>Rafael Oliveira</h1>
           <span>Full-stack Engineer</span>
         </div>
         <span className="main-line">&gt;_ Let's build something together</span>
@@ -913,7 +913,7 @@ export default function Home() {
             <img
               className="main-profile-pic"
               src="images/main-pic-big.png"
-              alt="Rafael Faitão"
+              alt="Rafael Oliveira"
             />
             <div className="card stack-card default">
               <div className="title-row">
