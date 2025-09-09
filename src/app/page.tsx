@@ -389,7 +389,7 @@ export default function Home() {
 
   const handleExperienceToggle = () => {
     if (showAllExperiences) {
-      // Se está expandido e vai recolher, fazer scroll para o topo da seção
+      // If expanded and will collapse, scroll to the top of the section
       const experienceSection = document.querySelector(".experience");
       if (experienceSection) {
         experienceSection.scrollIntoView({
@@ -409,7 +409,7 @@ export default function Home() {
         block: "start",
       });
     }
-    // Fechar o menu mobile após navegação
+    // Close mobile menu after navigation
     setMobileMenuOpen(false);
   };
 
@@ -419,14 +419,13 @@ export default function Home() {
 
   const handleProjectExpand = (index: number) => {
     setExpandedProject(index);
-    // Não bloqueia o scroll - permite navegar normalmente
   };
 
   const handleProjectCollapse = () => {
     setExpandedProject(null);
   };
 
-  // Função para fechar ao pressionar ESC
+  // Close on esc
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape" && expandedProject !== null) {
@@ -443,7 +442,7 @@ export default function Home() {
     };
   }, [expandedProject, mobileMenuOpen]);
 
-  // Fechar menu mobile quando clicar fora
+  // Close mobile menu
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Element;
@@ -541,7 +540,7 @@ export default function Home() {
     if (formStatus) {
       const timer = setTimeout(() => {
         setFormStatus("");
-      }, 5000); // Remove o toast após 5 segundos
+      }, 5000); // Remove toast after 5 seconds
 
       return () => clearTimeout(timer);
     }
