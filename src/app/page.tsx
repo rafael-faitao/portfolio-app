@@ -106,7 +106,7 @@ export default function Home() {
       when: "2022",
       where: "Project Mark",
       description:
-        "Canva-like collaborative tool to craft proposals, including images and exportation to PDF. An innovative design platform that empowers creative teams with advanced collaboration features. Developed using C# and React, this tool provides comprehensive design capabilities, version control, asset management, and team workflow optimization. The system includes real-time editing, comment systems, approval workflows, and enterprise-grade security. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "Canva-like collaborative tool to craft proposals, including images and exportation to PDF. An innovative design platform that empowers creative teams with advanced collaboration features. ",
       techs: ["nodejs", "react", "vue"],
     },
     {
