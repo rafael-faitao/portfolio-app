@@ -22,6 +22,8 @@ main {
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
+    position: relative;
+    z-index: 2;
 }
 
 .main-navigation {
@@ -91,7 +93,7 @@ main {
         }
         
         @media (max-width: 768px) {
-            display: none; // Esconder em mobile - pode implementar menu hamburger depois
+            display: none;
         }
 
         .nav-link {
@@ -111,7 +113,6 @@ main {
                 padding: 0.6rem 1.2rem;
             }
 
-            // Efeito de shimmer no hover
             &::before {
                 content: '';
                 position: absolute;
@@ -124,7 +125,6 @@ main {
                 z-index: 1;
             }
 
-            // Efeito de glow no fundo
             &::after {
                 content: '';
                 position: absolute;
@@ -139,7 +139,6 @@ main {
                 border-radius: 50%;
             }
 
-            // Conteúdo do link
             span {
                 position: relative;
                 z-index: 2;
@@ -190,7 +189,6 @@ main {
                 }
             }
 
-            // Animação de pulse para o link ativo
             &.active {
                 animation: navPulse 3s infinite;
             }
@@ -319,7 +317,6 @@ main {
     }
 }
 
-// Animações da navbar
 @keyframes navPulse {
     0%, 100% { 
         box-shadow: 
@@ -405,7 +402,6 @@ section {
 }
 
 .hero-section {
-    //background: url('/images/bg.svg');
     background-size: cover;
     align-items: center;
     justify-content: center;
@@ -1624,7 +1620,6 @@ section.projects {
                 aspect-ratio: 0.9;
             }
             
-            // Shimmer effect for hover (same as timeline cards)
             &::before {
                 content: '';
                 position: absolute;
@@ -1757,7 +1752,6 @@ section.projects {
                     margin-bottom: 0.8rem;
                 }
                 
-                // Truncar texto na versão normal
                 &.truncated {
                     display: -webkit-box;
                     -webkit-line-clamp: 3;
@@ -1783,43 +1777,49 @@ section.projects {
             
         }
         
-        // Estilos para expansão dos cards
         &.expanded {
             .experience-card {
                 transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
                 
                 &:not(.expanded-card) {
-                    display: none; // Esconde completamente os outros cards
+                    display: none;
                 }
                 
                 &.expanded-card {
-                    grid-column: 1 / -1; // Ocupa toda a largura da grid
-                    max-height: none;
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 90vw;
+                    max-width: 1200px;
+                    max-height: 95vh;
                     height: auto;
-                    min-height: 600px; // Aumentei de 500px para 600px
-                    aspect-ratio: unset;
-                    padding: 4rem; // Aumentei o padding de 3rem para 4rem
-                    transform: scale(1);
-                    z-index: 10;
-                    position: relative;
-                    background: rgba(0, 0, 0, 0.3);
-                    border-color: rgba(255, 255, 255, 0.6);
+                    overflow: visible;
+                    z-index: 1000;
+                    padding: 4rem;
+                    background: rgba(0, 0, 0, 0.95);
+                    border: 2px solid rgba(255, 255, 255, 0.6);
+                    border-radius: 20px;
                     box-shadow: 
-                        0 20px 60px rgba(0, 0, 0, 0.5),
+                        0 20px 60px rgba(0, 0, 0, 0.8),
                         0 0 40px rgba(255, 255, 255, 0.1);
                     
                     @media (max-width: 768px) {
+                        width: 95vw;
                         padding: 2rem;
-                        min-height: 500px;
+                        max-height: 90vh;
+                        overflow-y: auto;
                     }
                     
                     @media (max-width: 480px) {
+                        width: 98vw;
                         padding: 1.5rem;
-                        min-height: 450px;
+                        max-height: 85vh;
+                        overflow-y: auto;
                     }
                     
                     .upper {
-                        margin-bottom: 3rem; // Aumentei de 2rem para 3rem
+                        margin-bottom: 3rem;
                         
                         @media (max-width: 768px) {
                             margin-bottom: 2rem;
@@ -1827,8 +1827,8 @@ section.projects {
                     }
                     
                     .experience-title {
-                        font-size: 3rem; // Aumentei de 2.5rem para 3rem
-                        margin-bottom: 2rem; // Aumentei de 1.5rem para 2rem
+                        font-size: 3rem;
+                        margin-bottom: 2rem;
                         line-height: 1.2;
                         
                         @media (max-width: 768px) {
@@ -1843,8 +1843,8 @@ section.projects {
                     }
                     
                     .experience-where-when {
-                        font-size: 1.4rem; // Aumentei de 1.2rem para 1.4rem
-                        margin-bottom: 2.5rem; // Aumentei de 2rem para 2.5rem
+                        font-size: 1.4rem;
+                        margin-bottom: 2.5rem;
                         color: rgba(255, 255, 255, 0.8);
                         
                         @media (max-width: 768px) {
@@ -1859,9 +1859,9 @@ section.projects {
                     }
                     
                     .experience-description {
-                        font-size: 1.2rem; // Aumentei de 1.1rem para 1.2rem
-                        line-height: 2; // Aumentei de 1.8 para 2
-                        margin-bottom: 3rem; // Aumentei de 2rem para 3rem
+                        font-size: 1.2rem;
+                        line-height: 2;
+                        margin-bottom: 3rem;
                         color: rgba(255, 255, 255, 0.9);
                         
                         @media (max-width: 768px) {
@@ -1897,7 +1897,6 @@ section.projects {
             }
         }
         
-        // Botão de fechar
         .close-button {
             position: absolute;
             top: 1rem;
@@ -1929,7 +1928,6 @@ section.projects {
         }
     }
     
-    // Navegação específica para seção de projetos
     .section-navigation {
         display: flex;
         justify-content: center;
@@ -2573,31 +2571,57 @@ section.experience {
             }
             
             .timeline-line {
-                left: 30px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 1;
             }
             
             .timeline-item {
                 margin-bottom: 2.5rem;
+                flex-direction: column;
+                align-items: center;
+                position: relative;
                 
-                .timeline-year {
-                    left: 30px;
-                    font-size: 0.9rem;
-                    padding: 0.3rem 0.8rem;
-                    min-width: 60px;
-                    border-radius: 15px;
+                &.year-marker {
+                    .timeline-year {
+                        position: relative;
+                        left: auto;
+                        transform: none;
+                        font-size: 0.9rem;
+                        padding: 0.3rem 0.8rem;
+                        min-width: 60px;
+                        border-radius: 15px;
+                        margin-bottom: 1rem;
+                        z-index: 3;
+                        background: black;
+                        border: 1px solid white;
+                        color: white;
+                    }
+                    
+                    .timeline-dot {
+                        position: relative;
+                        left: auto;
+                        top: auto;
+                        transform: none;
+                        width: 10px;
+                        height: 10px;
+                        z-index: 2;
+                        margin: 0.5rem 0;
+                    }
                 }
                 
-                .timeline-dot {
-                    left: 30px;
-                    width: 10px;
-                    height: 10px;
+                .timeline-tick {
+                    display: none;
                 }
                 
                 .timeline-card {
-                    width: calc(100% - 80px);
-                    margin-left: 80px !important;
+                    width: calc(100% - 40px);
+                    margin-left: 0 !important;
                     margin-right: 0 !important;
                     padding: 1rem;
+                    align-self: center;
+                    position: relative;
+                    z-index: 2;
                     
                     .experience-header {
                         .experience-title-text {
@@ -2623,7 +2647,7 @@ section.experience {
                 
                 &.left,
                 &.right {
-                    justify-content: flex-start;
+                    justify-content: center;
                 }
             }
         }

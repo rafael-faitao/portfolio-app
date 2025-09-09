@@ -1,5 +1,5 @@
 "use client";
-// Tech code to full name mapping
+
 const techNames: Record<string, string> = {
   angular: "Angular",
   react: "React",
@@ -19,7 +19,7 @@ const techNames: Record<string, string> = {
 };
 
 import { useState, useRef, useEffect } from "react";
-// import HeroBg from "./hero-bg";
+import HeroBg from "./hero-bg";
 import CircularSkillBar from "./components/skill-circle";
 
 type Msg = {
@@ -41,16 +41,17 @@ export default function Home() {
   const [formStatus, setFormStatus] = useState("");
   const [showAllExperiences, setShowAllExperiences] = useState(true);
   const [activeSection, setActiveSection] = useState("home");
-  const [expandedProject, setExpandedProject] = useState<number | null>(null);
+  // const [expandedProject, setExpandedProject] = useState<number | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showHeroBg, setShowHeroBg] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
-  const lang = "en-US"; // or "en-US" — change as desired
+  const lang = "en-US"; 
 
   const stacks = [
     {
       title: "Angular",
       code: "angular",
-      percentage: 90,
+      percentage: 95,
     },
     {
       title: "React",
@@ -83,13 +84,6 @@ export default function Home() {
   const handleSuggestionClick = (suggestion: string) => {
     setInput(suggestion);
     inputRef.current?.focus();
-  };
-
-  const scrollToAboutMe = () => {
-    const aboutSection = document.querySelector(".about-me");
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: "smooth" });
-    }
   };
 
   const projects = [
@@ -352,25 +346,25 @@ export default function Home() {
     ? experiences
     : experiences.slice(0, 2);
 
-  // Generate timeline items with year markers and cards positioned between years
+  
   const generateTimelineItems = () => {
-    // Get all unique years from experiences
+    
     const allYears = Array.from(new Set(experiences.map((exp) => exp.year)));
-    allYears.sort((a, b) => b - a); // Descending order
+    allYears.sort((a, b) => b - a); 
     const items = [];
     let cardIndex = 0;
 
     for (let i = 0; i < allYears.length; i++) {
       const year = allYears[i];
-      // Add year marker
+
       items.push({
         type: "year",
         year: year,
         key: `year-${year}`,
       });
-      // Add all experiences for this year
+
       const experiencesInYear = visibleExperiences.filter((exp) => exp.year === year);
-            experiencesInYear.sort((a, b) => b.month - a.month); // Sort by month within the year
+            experiencesInYear.sort((a, b) => b.month - a.month);
 
       experiencesInYear.forEach((exp) => {
         items.push({
@@ -389,7 +383,6 @@ export default function Home() {
 
   const handleExperienceToggle = () => {
     if (showAllExperiences) {
-      // If expanded and will collapse, scroll to the top of the section
       const experienceSection = document.querySelector(".experience");
       if (experienceSection) {
         experienceSection.scrollIntoView({
@@ -409,7 +402,6 @@ export default function Home() {
         block: "start",
       });
     }
-    // Close mobile menu after navigation
     setMobileMenuOpen(false);
   };
 
@@ -417,20 +409,51 @@ export default function Home() {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  /*
   const handleProjectExpand = (index: number) => {
     setExpandedProject(index);
+    
+    // Bloqueia o scroll quando projeto está expandido - abordagem robusta
+    const scrollY = window.scrollY;
+    document.body.style.setProperty('position', 'fixed', 'important');
+    document.body.style.setProperty('top', `-${scrollY}px`, 'important');
+    document.body.style.setProperty('width', '100%', 'important');
+    document.body.style.setProperty('overflow', 'hidden', 'important');
   };
 
   const handleProjectCollapse = () => {
     setExpandedProject(null);
+    // Restaura o scroll quando projeto é fechado
+    const scrollY = parseInt(document.body.style.top || '0') * -1;
+    document.body.style.removeProperty('position');
+    document.body.style.removeProperty('top');
+    document.body.style.removeProperty('width');
+    document.body.style.removeProperty('overflow');
+    
+    setTimeout(() => {
+      const projectsSection = document.getElementById('projects');
+      if (projectsSection) {
+        const rect = projectsSection.getBoundingClientRect();
+        const offsetTop = window.pageYOffset + rect.top;
+        const elementHeight = projectsSection.offsetHeight;
+        const windowHeight = window.innerHeight;
+        const scrollTo = offsetTop - (windowHeight / 2) + (elementHeight / 2);
+        
+        window.scrollTo({
+          top: scrollTo,
+          behavior: 'smooth'
+        });
+      }
+    }, 300);
   };
+  */
 
-  // Close on esc
+  
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && expandedProject !== null) {
-        handleProjectCollapse();
-      }
+      // if (event.key === "Escape" && expandedProject !== null) {
+      //   handleProjectCollapse();
+      // }
       if (event.key === "Escape" && mobileMenuOpen) {
         setMobileMenuOpen(false);
       }
@@ -440,9 +463,20 @@ export default function Home() {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [expandedProject, mobileMenuOpen]);
+  }, [mobileMenuOpen]);
 
-  // Close mobile menu
+  
+  useEffect(() => {
+    
+    return () => {
+      document.body.style.removeProperty('position');
+      document.body.style.removeProperty('top');
+      document.body.style.removeProperty('width');
+      document.body.style.removeProperty('overflow');
+    };
+  }, []);
+
+  
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Element;
@@ -468,7 +502,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!messages.length) return;
-    // auto-scroll answers container to bottom when new message arrives
+    
     const el = document.querySelector(".answers");
     if (el) el.scrollTop = el.scrollHeight;
   }, [messages]);
@@ -491,7 +525,7 @@ export default function Home() {
         }
       }
 
-      // Track active section
+      
       const sections = ["home", "about", "projects", "experience", "contact"];
       const scrollTop = window.scrollY;
       const windowHeight = window.innerHeight;
@@ -506,7 +540,7 @@ export default function Home() {
           const sectionTop = section.offsetTop;
           const sectionBottom = sectionTop + section.offsetHeight;
 
-          // Calculate how much of the section is visible
+          
           const visibleTop = Math.max(sectionTop, scrollTop);
           const visibleBottom = Math.min(
             sectionBottom,
@@ -515,7 +549,7 @@ export default function Home() {
           const visibleHeight = Math.max(0, visibleBottom - visibleTop);
           const visibility = visibleHeight / windowHeight;
 
-          // Also check if viewport center is in this section
+          
           const centerInSection =
             viewportCenter >= sectionTop && viewportCenter <= sectionBottom;
 
@@ -530,17 +564,66 @@ export default function Home() {
       });
 
       setActiveSection(currentSection);
+      
+      
+      setShowHeroBg(currentSection === "home");
+      
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  
+  useEffect(() => {
+    let isScrolling = false;
+    let scrollTimeout: NodeJS.Timeout;
+
+    const handleHeroScroll = (event: WheelEvent) => {
+      const homeSection = document.getElementById("home");
+      const aboutSection = document.getElementById("about");
+      
+      if (!homeSection || !aboutSection || isScrolling) return;
+
+      const currentScrollY = window.scrollY;
+      const homeSectionHeight = homeSection.offsetHeight;
+      const viewportHeight = window.innerHeight;
+      
+      
+      const isNearEndOfHero = currentScrollY >= (homeSectionHeight - viewportHeight - 100) && 
+                             currentScrollY < homeSectionHeight;
+      
+      
+      if (isNearEndOfHero && event.deltaY > 0) {
+        event.preventDefault();
+        isScrolling = true;
+        
+        
+        aboutSection.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+        
+        
+        scrollTimeout = setTimeout(() => {
+          isScrolling = false;
+        }, 1000);
+      }
+    };
+
+    window.addEventListener('wheel', handleHeroScroll, { passive: false });
+    
+    return () => {
+      window.removeEventListener('wheel', handleHeroScroll);
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+    };
+  }, []);
+
   useEffect(() => {
     if (formStatus) {
       const timer = setTimeout(() => {
         setFormStatus("");
-      }, 5000); // Remove toast after 5 seconds
+      }, 5000); 
 
       return () => clearTimeout(timer);
     }
@@ -647,7 +730,7 @@ export default function Home() {
 
   return (
     <main>
-      {/* <HeroBg /> */}
+      <HeroBg isVisible={showHeroBg} opacity={showHeroBg ? 1 : 0} />
       <nav className="main-navigation">
         <div className="nav-left">
           <img
@@ -885,7 +968,10 @@ export default function Home() {
           </div>
         </div>
         <div className="see-more-container">
-          <button className="see-more-btn" onClick={scrollToAboutMe}>
+          <button 
+            className="see-more-btn" 
+            onClick={() => handleNavigation("about")}
+          >
             <span>See More</span>
             <svg
               width="24"
@@ -979,7 +1065,12 @@ export default function Home() {
                   </div>
                   <div className="experience-content">
                     <div className="experience-years">+10 Years</div>
-                    <button className="see-more-btn">See More</button>
+                    <button 
+                      className="see-more-btn"
+                      onClick={() => handleNavigation("experience")}
+                    >
+                      See More
+                    </button>
                   </div>
                 </div>
               </div>
@@ -1011,7 +1102,12 @@ export default function Home() {
                       </div>
                     </div>
                   ))}
-                  <button className="projects-btn">See More</button>
+                  <button 
+                    className="projects-btn"
+                    onClick={() => handleNavigation("projects")}
+                  >
+                    See More
+                  </button>
                 </div>
               </div>
             </div>
@@ -1047,25 +1143,19 @@ export default function Home() {
         </div>
       </section>
       <section id="projects" className="projects">
-        <div
-          className={`projects-list ${
-            expandedProject !== null ? "expanded" : ""
-          }`}
-        >
+        <div className="projects-list">
           {projects.map((exp, idx) => (
             <div
               key={idx}
-              className={`experience-card default ${
-                expandedProject === idx ? "expanded-card" : ""
-              }`}
-              /*onClick={() =>
-                expandedProject === null ? handleProjectExpand(idx) : undefined
-              }*/
-              style={{
-                cursor: expandedProject === null ? "pointer" : "default",
-              }}
+              className="experience-card default"
+              // onClick={() =>
+              //   expandedProject === null ? handleProjectExpand(idx) : undefined
+              // }
+              // style={{
+              //   cursor: expandedProject === null ? "pointer" : "default",
+              // }}
             >
-              {expandedProject === idx && (
+              {/* {expandedProject === idx && (
                 <div
                   className="close-button"
                   onClick={(e) => {
@@ -1075,17 +1165,16 @@ export default function Home() {
                 >
                   ×
                 </div>
-              )}
+              )} */}
               <div className="upper">
                 <div className="experience-title">{exp.title}</div>
                 <div className="experience-where-when">
                   {exp.where} - {exp.when}
                 </div>
-                <div
-                  className={`experience-description ${
+                <div className="experience-description">
+                  {/* className={`experience-description ${
                     expandedProject !== idx ? "truncated" : ""
-                  }`}
-                >
+                  }`} */}
                   {exp.description}
                 </div>
               </div>
@@ -1105,8 +1194,8 @@ export default function Home() {
           ))}
         </div>
 
-        {expandedProject === null && (
-          <div className="section-navigation">
+        <div className="section-navigation">
+          {/* {expandedProject === null && ( */}
             <button
               className="section-nav-btn"
               onClick={() => handleNavigation("experience")}
@@ -1129,7 +1218,7 @@ export default function Home() {
               </svg>
             </button>
           </div>
-        )}
+        {/* )} */}
       </section>
       <section id="experience" className="experience">
         <div className="experience-container">
