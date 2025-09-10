@@ -675,8 +675,6 @@ export default function Home() {
         body: JSON.stringify({ messages: next, lang }),
       });
 
-      console.dir("res", res);
-
       const data = await res.json();
       if (res.ok) {
         // Parse markdown at input level
@@ -698,7 +696,7 @@ export default function Home() {
     } catch (err: any) {
       setMessages((m) => [
         ...m,
-        { role: "assistant", content: `Network error: ${err?.message || err}` },
+        { role: "assistant", content: `A network error ocurred. Please try again` },
       ]);
     } finally {
       setLoading(false);
