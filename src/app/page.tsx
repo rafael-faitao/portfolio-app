@@ -450,6 +450,7 @@ export default function Home() {
 
   
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     const handleKeyDown = (event: KeyboardEvent) => {
       // if (event.key === "Escape" && expandedProject !== null) {
       //   handleProjectCollapse();
@@ -509,6 +510,7 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
+
       const navbar = document.querySelector(".main-navigation") as HTMLElement;
       const heroSection = document.querySelector(
         ".hero-section"
@@ -575,36 +577,35 @@ export default function Home() {
   }, []);
 
   
-  useEffect(() => {
+  useEffect(() => {    
+    let isChatHover = false;
     let isScrolling = false;
     let scrollTimeout: NodeJS.Timeout;
 
+    
+
     const handleHeroScroll = (event: WheelEvent) => {
+      if (isChatHover) {
+        return;
+      }
       const homeSection = document.getElementById("home");
       const aboutSection = document.getElementById("about");
-      
       if (!homeSection || !aboutSection || isScrolling) return;
 
       const currentScrollY = window.scrollY;
       const homeSectionHeight = homeSection.offsetHeight;
       const viewportHeight = window.innerHeight;
-      
-      
-      const isNearEndOfHero = currentScrollY >= (homeSectionHeight - viewportHeight - 100) && 
+
+      const isNearEndOfHero = currentScrollY >= (homeSectionHeight - viewportHeight - 100) &&
                              currentScrollY < homeSectionHeight;
-      
-      
+
       if (isNearEndOfHero && event.deltaY > 0) {
         event.preventDefault();
         isScrolling = true;
-        
-        
-        aboutSection.scrollIntoView({ 
+        aboutSection.scrollIntoView({
           behavior: 'smooth',
           block: 'start'
         });
-        
-        
         scrollTimeout = setTimeout(() => {
           isScrolling = false;
         }, 1000);
@@ -612,10 +613,38 @@ export default function Home() {
     };
 
     window.addEventListener('wheel', handleHeroScroll, { passive: false });
+
+    // Scroll lock on chat-container hover
+    const chatContainer = document.querySelector('.chat-container');
+
+    const lockScroll = () => {
+      if (!isChatHover) {
+        isChatHover = true;
+        document.body.style.overflow = 'hidden';
+        document.body.style.height = '100vh';
+      }
+    };
+    const unlockScroll = () => {
+      if (isChatHover) {
+        isChatHover = false;
+        console.dir('unhover');
+        document.body.style.height = 'auto';
+        document.body.style.overflow = '';
+      }
+    };
+    if (chatContainer) {
+      chatContainer.addEventListener('mouseenter', lockScroll);
+      chatContainer.addEventListener('mouseleave', unlockScroll);
+    }
     
     return () => {
       window.removeEventListener('wheel', handleHeroScroll);
       if (scrollTimeout) clearTimeout(scrollTimeout);
+      if (chatContainer) {
+        chatContainer.removeEventListener('mouseenter', lockScroll);
+        chatContainer.removeEventListener('mouseleave', unlockScroll);
+      }
+      document.body.style.overflow = '';
     };
   }, []);
 
