@@ -1,4 +1,7 @@
+
 "use client";
+
+import { marked } from "marked";
 
 const techNames: Record<string, string> = {
   angular: "Angular",
@@ -85,7 +88,6 @@ export default function Home() {
     setInput(suggestion);
     inputRef.current?.focus();
   };
-
   const projects = [
     {
       title: "vProMedia",
@@ -666,7 +668,6 @@ export default function Home() {
     setMessages(next);
     setInput("");
     setLoading(true);
-
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
@@ -678,9 +679,10 @@ export default function Home() {
 
       const data = await res.json();
       if (res.ok) {
+        // Parse markdown at input level
         setMessages((m) => [
           ...m,
-          { role: "assistant", content: data.reply || "" },
+          { role: "assistant", content: String(marked.parse(data.reply || "")) },
         ]);
       } else {
         setMessages((m) => [
@@ -977,7 +979,11 @@ export default function Home() {
           <pre className="answers">
             {messages.map((msg, i) => (
               <div key={i} className={msg.role}>
-                <span>{msg.content}</span>
+                {msg.role === "assistant" ? (
+                  <span dangerouslySetInnerHTML={{ __html: msg.content }} />
+                ) : (
+                  <span>{msg.content}</span>
+                )}
               </div>
             ))}
           </pre>
