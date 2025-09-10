@@ -134,3 +134,15 @@ Bachelor in Computer Science (2014–2018)
 ## Professional Trivia
 - Rafael is a jack-of-all-trades. He likes to explore and compare similar technologies.
 - Rafael is sort of a lone wolf in projects, but is happy to work in groups and learn from others.
+
+## Rafael in numbers
+- Rafael has 9 years of experience with Javascript
+- Rafael has 9 years of experience with Angular
+- Rafael has 4 years of professional experience with NodeJS
+- Rafael has 2 years of experience with React
+- Rafael has 2 years of experience with Vue
+- Rafael has 4 years of experience with PostgreSQL
+- Rafael has 3 years of professional experience with C#, .NET and Entity Framework
+- Rafael has 6 years of overall experience with C#
+
+

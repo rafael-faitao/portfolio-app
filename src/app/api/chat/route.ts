@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
       temperature: 0.2,
       messages: [
         { role: "system", content: sys },
-        { role: "system", content: `Use only this context. If the answer isn't in here, say you don't know.\n\n${context}` },
+        { role: "system", content: `Use only this context. If the answer isn't in here, say you don't have any information on that.\n\n${context}` },
         ...messages,
       ],
     });
