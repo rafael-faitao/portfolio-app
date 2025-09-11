@@ -1533,6 +1533,48 @@ export default function Home() {
           </div>
         </div>
       )}
+      
+      {/* Structured Data JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Rafael Oliveira",
+            "jobTitle": "Full-Stack Engineer",
+            "description": "Experienced Full-Stack Engineer specializing in React, Next.js, Node.js, and modern web technologies with 10+ years of experience.",
+            "url": "https://rafael-oliveira.dev",
+            "image": "https://rafael-oliveira.dev/images/main-pic-big.png",
+            "sameAs": [
+              "https://linkedin.com/in/rafael-oliveira",
+              "https://github.com/rafael-faitao"
+            ],
+            "knowsAbout": [
+              "React",
+              "Next.js", 
+              "Node.js",
+              "TypeScript",
+              "JavaScript",
+              "Angular",
+              "Vue.js",
+              "Three.js",
+              "WebGL",
+              "Full-Stack Development",
+              "Web Development",
+              "Software Engineering"
+            ],
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Freelancer"
+            },
+            "alumniOf": {
+              "@type": "EducationalOrganization", 
+              "name": "UNIFESO"
+            }
+          })
+        }}
+      />
     </main>
   );
 }
