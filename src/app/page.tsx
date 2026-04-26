@@ -952,7 +952,7 @@ export default function Home() {
 
       <section id="home" className="hero-section flex-col">
         <div className="top flex-col">
-          <img src="images/main-pic.png" alt="Main" />
+          <img src="images/main-pic.png" alt="Main" className="small-av" />
           <h1>Rafael Oliveira</h1>
           <span>Full-stack Engineer</span>
         </div>
