@@ -769,7 +769,7 @@ export default function Home() {
           />
           <div className="nav-info">
             <h3>Rafael Oliveira</h3>
-            <span>Full-Stack Engineer</span>
+            <span>Full-Stack Product Engineer</span>
           </div>
         </div>
         <div className="nav-right">
@@ -954,7 +954,7 @@ export default function Home() {
         <div className="top flex-col">
           <img src="images/main-pic.png" alt="Main" className="small-av" />
           <h1>Rafael Oliveira</h1>
-          <span>Full-stack Engineer</span>
+          <span>I build high-performance dashboards and AI-powered features for SaaS products</span>
         </div>
         <span className="main-line">&gt;_ Let's build something together</span>
         <div className="chat-container">
@@ -1065,14 +1065,9 @@ export default function Home() {
                 <h2>About Rafael</h2>
               </div>
               <div className="about-text">
-                Fullstack Engineer with 10+ years of experience building
-                scalable applications across healthcare, media, and AEC
-                industries. Specialized in Angular (8+ years) and Node.js (8+
-                years) with a strong focus on UX design, performance
-                optimization, and leading cross-functional teams. Proven success
-                delivering enterprise-grade systems and collaborating remotely
-                with international stakeholders. Fluent in English, open to
-                US/EU remote roles.
+                Fullstack Product Engineer with 10+ years building high-performance dashboards, real-time systems, and AI-powered features for SaaS platforms.
+Specialized in Angular and Node.js, with a strong focus on performance optimization, UX, and turning complex data into actionable products.
+Proven track record delivering enterprise systems across healthcare, media, and engineering sectors, working remotely with international teams.
               </div>
             </div>
 
@@ -1542,8 +1537,8 @@ export default function Home() {
             "@context": "https://schema.org",
             "@type": "Person",
             "name": "Rafael Oliveira",
-            "jobTitle": "Full-Stack Engineer",
-            "description": "Experienced Full-Stack Engineer specializing in React, Next.js, Node.js, and modern web technologies with 10+ years of experience.",
+            "jobTitle": "Full-Stack Product Engineer",
+            "description": "Experienced Full-Stack Product Engineer specializing in React, Next.js, Node.js, and modern web technologies with 10+ years of experience.",
             "url": "https://rafael-oliveira.dev",
             "image": "https://rafael-oliveira.dev/images/main-pic-big.png",
             "sameAs": [

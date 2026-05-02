@@ -1,7 +1,7 @@
 export const metadata = {
-  title: "Rafael Oliveira - Full-Stack Engineer",
-  description: "Experienced Full-Stack Engineer specializing in React, Next.js, Node.js, and modern web technologies. Building innovative solutions with 10+ years of experience.",
-  keywords: "Rafael Oliveira, Full-Stack Engineer, React, Next.js, Node.js, TypeScript, JavaScript, Angular, Vue.js, Portfolio, Web Developer",
+  title: "Rafael Oliveira - Full-Stack Product Engineer",
+  description: "Experienced Full-Stack Product Engineer specializing in React, Next.js, Node.js, and modern web technologies. Building innovative solutions with 10+ years of experience.",
+  keywords: "Rafael Oliveira, Full-Stack Product Engineer, React, Next.js, Node.js, TypeScript, JavaScript, Angular, Vue.js, Portfolio, Web Developer",
   authors: [{ name: "Rafael Oliveira" }],
   creator: "Rafael Oliveira",
   publisher: "Rafael Oliveira",
@@ -9,22 +9,22 @@ export const metadata = {
     type: "website",
     locale: "en_US",
     url: "https://rafael-oliveira.dev",
-    title: "Rafael Oliveira - Full-Stack Engineer",
-    description: "Experienced Full-Stack Engineer specializing in React, Next.js, Node.js, and modern web technologies. Building innovative solutions with 10+ years of experience.",
+    title: "Rafael Oliveira - Full-Stack Product Engineer",
+    description: "Experienced Full-Stack Product Engineer specializing in React, Next.js, Node.js, and modern web technologies. Building innovative solutions with 10+ years of experience.",
     siteName: "Rafael Oliveira Portfolio",
     images: [
       {
         url: "/images/main-pic-big.png",
         width: 1200,
         height: 630,
-        alt: "Rafael Oliveira - Full-Stack Engineer",
+        alt: "Rafael Oliveira - Full-Stack Product Engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rafael Oliveira - Full-Stack Engineer",
-    description: "Experienced Full-Stack Engineer specializing in React, Next.js, Node.js, and modern web technologies.",
+    title: "Rafael Oliveira - Full-Stack Product Engineer",
+    description: "Experienced Full-Stack Product Engineer specializing in React, Next.js, Node.js, and modern web technologies.",
     images: ["/images/main-pic-big.png"],
   },
   robots: {
