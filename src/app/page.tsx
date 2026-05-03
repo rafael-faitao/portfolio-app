@@ -61,7 +61,16 @@ export default function Home() {
   const [lightboxImg, setLightboxImg] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showHeroBg, setShowHeroBg] = useState(true);
+  const [typedText, setTypedText] = useState("");
+  const [landingFading, setLandingFading] = useState(false);
+  const [landingDone, setLandingDone] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const dismissLanding = () => {
+    if (landingFading || landingDone) return;
+    setLandingFading(true);
+    setTimeout(() => setLandingDone(true), 800);
+  };
   const lang = "en-US"; 
 
   const stacks = [
@@ -174,6 +183,43 @@ export default function Home() {
     },
   ];
 
+  const services = [
+    {
+      title: "Fix My Slow App",
+      description: ["Is your app slow, laggy, or struggling under real usage?", "I identify performance bottlenecks and optimize your application for speed, responsiveness, and scalability — often within days."],
+      bullets: ["Angular change detection optimization", "API & data flow improvements", "Rendering & UI performance fixes"],
+      price: "Starting at $200",
+      waMessage: "Hi Rafael! I'm interested in the \"Fix My Slow App\" service. My app has performance issues and I'd like to discuss how you can help.",
+    },
+    {
+      title: "Add AI to Your Product",
+      description: ["Turn your product into an AI-powered experience.", "I integrate practical AI features that improve usability, automation, and user engagement — without overengineering."],
+      bullets: ["AI chat & assistants", "Transcription + smart data extraction", "Workflow automation with AI"],
+      price: "Starting at $300",
+      waMessage: "Hi Rafael! I'm interested in the \"Add AI to Your Product\" service. I'd like to discuss integrating AI features into my product.",
+    },
+    {
+      title: "Real-Time Dashboards",
+      description: ["Build powerful dashboards that turn data into decisions.", "I create fast, scalable, real-time interfaces for monitoring, analytics, and internal tools."],
+      bullets: ["Live data updates (WebSockets)", "Admin panels & analytics tools", "Data-heavy UI systems"],
+      price: "Starting at $800",
+      waMessage: "Hi Rafael! I'm interested in the \"Real-Time Dashboards\" service. I'd like to build a real-time data dashboard.",
+    },
+    {
+      title: "Build Your MVP Fast",
+      description: ["Have an idea? Let's turn it into a working product — quickly.", "I build production-ready MVPs focused on speed, usability, and real-world validation."],
+      bullets: ["Fullstack development (Angular + Node.js)", "Scalable architecture from day one", "Clean UX focused on user adoption"],
+      price: "Starting at $1,000",
+      waMessage: "Hi Rafael! I'm interested in the \"Build Your MVP Fast\" service. I have an idea I'd like to turn into a product.",
+    },
+    {
+      title: "Modernize Your System",
+      description: ["Stuck with messy or outdated code?", "I refactor and modernize existing systems to improve performance, maintainability, and scalability."],
+      bullets: ["Codebase cleanup & restructuring", "Tech debt reduction", "Framework upgrades (Angular, Node)"],
+      price: "Starting at $400",
+      waMessage: "Hi Rafael! I'm interested in the \"Modernize Your System\" service. I'd like to discuss refactoring and modernizing my codebase.",
+    },
+  ];
 
     const experiences = [
   {
@@ -507,6 +553,38 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    const fullText = ">_ Let's build something together";
+    let timeout: ReturnType<typeof setTimeout>;
+    let index = 0;
+    let isDeleting = false;
+
+    const tick = () => {
+      if (!isDeleting) {
+        index++;
+        setTypedText(fullText.slice(0, index));
+        if (index === fullText.length) {
+          isDeleting = true;
+          timeout = setTimeout(tick, 2200);
+        } else {
+          timeout = setTimeout(tick, 65);
+        }
+      } else {
+        index--;
+        setTypedText(fullText.slice(0, index));
+        if (index === 0) {
+          isDeleting = false;
+          timeout = setTimeout(tick, 600);
+        } else {
+          timeout = setTimeout(tick, 30);
+        }
+      }
+    };
+
+    timeout = setTimeout(tick, 500);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  useEffect(() => {
     if (openProject !== null) {
       document.body.classList.add('modal-open');
     } else {
@@ -602,7 +680,7 @@ export default function Home() {
       }
 
       
-      const sections = ["home", "about", "projects", "experience", "contact"];
+      const sections = ["home", "about", "projects", "experience", "services", "contact"];
       const scrollTop = window.scrollY;
       const windowHeight = window.innerHeight;
       const viewportCenter = scrollTop + windowHeight / 2;
@@ -831,6 +909,35 @@ export default function Home() {
 
   return (
     <main>
+      {!landingDone && (
+        <div
+          className={`landing-overlay${landingFading ? " landing-fading" : ""}`}
+          onClick={dismissLanding}
+        >
+          <div className="landing-content" onClick={(e) => e.stopPropagation()}>
+            <span className="landing-label">Portfolio</span>
+            <h1 className="landing-name">
+              {"Rafael Oliveira".split("").map((char, i) => (
+                <span
+                  key={i}
+                  className="landing-char"
+                  style={{ animationDelay: `${0.3 + i * 0.05}s` }}
+                >
+                  {char === " " ? " " : char}
+                </span>
+              ))}
+            </h1>
+            <div className="landing-line" />
+            <p className="landing-tagline">Full-Stack Product Engineer</p>
+            <button className="landing-enter-btn" onClick={dismissLanding}>
+              Enter Portfolio
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12H19M13 6L19 12L13 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
       <HeroBg isVisible={showHeroBg} opacity={showHeroBg ? 1 : 0} />
       <nav className="main-navigation">
         <div className="nav-left">
@@ -888,6 +995,18 @@ export default function Home() {
             }}
           >
             <span>Experience</span>
+          </a>
+          <a
+            href="#services"
+            className={`nav-link ${
+              activeSection === "services" ? "active" : ""
+            }`}
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavigation("services");
+            }}
+          >
+            <span>Services</span>
           </a>
           <a
             href="#contact"
@@ -1007,6 +1126,18 @@ export default function Home() {
               Experience
             </a>
             <a
+              href="#services"
+              className={`nav-link ${
+                activeSection === "services" ? "active" : ""
+              }`}
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavigation("services");
+              }}
+            >
+              Services
+            </a>
+            <a
               href="#contact"
               className={`nav-link ${
                 activeSection === "contact" ? "active" : ""
@@ -1028,7 +1159,7 @@ export default function Home() {
           <h1>Rafael Oliveira</h1>
           <span>I build high-performance dashboards and AI-powered features for SaaS products</span>
         </div>
-        <span className="main-line">&gt;_ Let's build something together</span>
+        <span className="main-line">{typedText}<span className="typewriter-cursor">|</span></span>
         <div className="chat-container">
           <div className="chat-header">
             <img src="images/icons/ai-icon.svg" alt="AI" className="ai-icon" />
@@ -1415,9 +1546,9 @@ Proven track record delivering enterprise systems across healthcare, media, and 
           <div className="section-navigation">
             <button
               className="section-nav-btn"
-              onClick={() => handleNavigation("contact")}
+              onClick={() => handleNavigation("services")}
             >
-              <span>Contact Me</span>
+              <span>Services</span>
               <svg
                 width="24"
                 height="24"
@@ -1435,6 +1566,88 @@ Proven track record delivering enterprise systems across healthcare, media, and 
               </svg>
             </button>
           </div>
+        </div>
+      </section>
+
+      <section id="services" className="services">
+        <div className="services-inner">
+          <div className="services-header">
+            <h2>How I Can Help You</h2>
+            <p className="services-subtitle">
+              Clear, high-impact services designed to solve real product and engineering problems — fast.
+            </p>
+          </div>
+
+          <div className="services-grid">
+            {services.map((service, idx) => (
+              <a
+                key={idx}
+                href={`https://wa.me/5521976908021?text=${encodeURIComponent(service.waMessage)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="service-card"
+              >
+                <div className="service-card-header">
+                  <span className="service-title">{service.title}</span>
+                </div>
+                <div className="service-description">
+                  {service.description.map((para, i) => (
+                    <p key={i}>{para}</p>
+                  ))}
+                </div>
+                <ul className="service-bullets">
+                  {service.bullets.map((bullet, i) => (
+                    <li key={i}>{bullet}</li>
+                  ))}
+                </ul>
+                <div className="service-footer">
+                  <span className="service-price">{service.price}</span>
+                  <span className="service-wa-hint">
+                    <img src="images/icons/whatsapp-icon.svg" alt="WhatsApp" />
+                    Get started
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          <div className="services-cta-block">
+            <p className="services-cta-headline">Have a project or problem in mind?</p>
+            <p className="services-cta-sub">Let&apos;s talk and get it solved.</p>
+            <a
+              href={`https://wa.me/5521976908021?text=${encodeURIComponent("Hi Rafael! I saw your services and I'd like to start a conversation about working together.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="services-cta-btn"
+            >
+              <img src="images/icons/whatsapp-icon.svg" alt="WhatsApp" />
+              Start a Conversation
+            </a>
+          </div>
+        </div>
+
+        <div className="section-navigation">
+          <button
+            className="section-nav-btn"
+            onClick={() => handleNavigation("contact")}
+          >
+            <span>Contact Me</span>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7 10L12 15L17 10"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
         </div>
       </section>
 
