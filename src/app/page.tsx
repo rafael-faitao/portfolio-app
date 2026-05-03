@@ -185,6 +185,13 @@ export default function Home() {
 
   const services = [
     {
+      title: "Landing Page",
+      description: ["Need a professional landing page for your product, startup, or campaign?", "I design and build fast, conversion-focused landing pages that make great first impressions — delivered quickly."],
+      bullets: ["Custom design & development", "Mobile-responsive & fast-loading", "SEO-ready structure"],
+      price: "Starting at $100",
+      waMessage: "Hi Rafael! I'm interested in the \"Landing Page\" service. I'd like to discuss building a landing page.",
+    },
+    {
       title: "Fix My Slow App",
       description: ["Is your app slow, laggy, or struggling under real usage?", "I identify performance bottlenecks and optimize your application for speed, responsiveness, and scalability — often within days."],
       bullets: ["Angular change detection optimization", "API & data flow improvements", "Rendering & UI performance fixes"],
