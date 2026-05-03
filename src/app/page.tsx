@@ -30,6 +30,19 @@ type Msg = {
   content: string;
 };
 
+type Project = {
+  title: string;
+  when: string;
+  where: string;
+  description: string;
+  techs: string[];
+  hasContent?: boolean;
+  link?: string;
+  image?: string;
+  images?: string[];
+  video?: string;
+};
+
 export default function Home() {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
@@ -44,7 +57,8 @@ export default function Home() {
   const [formStatus, setFormStatus] = useState("");
   const [showAllExperiences, setShowAllExperiences] = useState(true);
   const [activeSection, setActiveSection] = useState("home");
-  // const [expandedProject, setExpandedProject] = useState<number | null>(null);
+  const [openProject, setOpenProject] = useState<number | null>(null);
+  const [lightboxImg, setLightboxImg] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showHeroBg, setShowHeroBg] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -88,7 +102,16 @@ export default function Home() {
     setInput(suggestion);
     inputRef.current?.focus();
   };
-  const projects = [
+  const projects: Project[] = [
+    {
+      title: "Medisigh CRM & BI",
+      when: "2026",
+      where: "Medisigh LTDA",
+      description:
+        "End-to-end CRM and Business Intelligence platform built from scratch to streamline clinic operations, recover lost leads, and surface actionable revenue metrics — driving profit growth of up to 50%.",
+      techs: ["angular", "nodejs", "openai"],
+      hasContent: true,
+    },
     {
       title: "vProMedia",
       when: "2023",
@@ -96,6 +119,7 @@ export default function Home() {
       description:
         "Multimedia Radio and TV Managing system, focused on spot creation, scripiting, and organization for several US-based Radio Companies.",
       techs: ["angular", "nodejs", "nestjs"],
+      hasContent: true,
     },
     {
       title: "Design+",
@@ -104,6 +128,16 @@ export default function Home() {
       description:
         "Canva-like collaborative tool to craft proposals, including images and exportation to PDF. An innovative design platform that empowers creative teams with advanced collaboration features. ",
       techs: ["nodejs", "react", "vue"],
+      hasContent: true,
+    },
+    {
+      title: "Patient Evolution",
+      when: "2025",
+      where: "Medisigh LTDA",
+      description:
+        "AI-powered feature integrated into Medisigh, enabling real-time audio transcription of patient-doctor conversations and automatic extraction of clinical data such as allergies, complaints, and objectives.",
+      techs: ["angular", "nodejs", "openai", "websocket"],
+      hasContent: true,
     },
     {
       title: "Medisigh",
@@ -112,14 +146,14 @@ export default function Home() {
       description:
         "Multifunction healthcare managing system, targeting plastic surgeons and other asthetic professionals. Includes patient, document, appointment handling, as well as advanced attendance systems that integrate with modern AI technologies.",
       techs: ["angular", "nodejs", "openai", "scrum"],
-      link: "http://medisigh.com.br/",
+      hasContent: true,
     },
     {
       title: "SojaVR Experience",
       when: "2019",
       where: "Imago 360",
       description:
-        "Virtual Reality experience for agriculture, allowing users to explore and learn about soybean farming in an immersive 3D environment. Developed using Unity and C#, this application provides interactive simulations, educational content, and real-time data visualization to enhance understanding of modern agricultural practices.",
+        "Immersive VR experience built in Unity and C# for agricultural education, letting users explore soybean farming through interactive simulations and real-time data visualization.",
       techs: ["csharp", "unity", "metaquest"],
     },
     {
@@ -340,6 +374,16 @@ export default function Home() {
   description:
     "Built Patient Evolution. Integrated with OpenAI API to introduce advanced AI-powered healthcare features. Enabled real-time audio transcription of patient-doctor conversations and automatic extraction of relevant details (allergies, complaints, objectives). Marked a major milestone in applying AI for transcription and semantic identification in healthcare applications.",
   techs: ["angular", "nodejs", "openai", "websocket"],
+},
+{
+  title: "Developed CRM & BI Platform for Medisigh",
+  company: "Medisigh",
+  period: "2026",
+  year: 2026,
+  month: 1,
+  description:
+    "Architected and delivered a full CRM and Business Intelligence suite from the ground up, purpose-built to address critical pain points in clinic day-to-day operations and management workflows. The CRM streamlined patient pipelines, enabling teams to identify and re-engage patients who dropped off mid-way through surgical hiring processes. The BI layer surfaced real-time metrics across revenue, conversion, and retention — providing leadership with data-driven insights that contributed to profit growth of up to 50%.",
+  techs: ["angular", "nodejs", "openai"],
 }
 
 ];
@@ -382,6 +426,13 @@ export default function Home() {
   };
 
   const timelineItems = generateTimelineItems();
+
+  // Map timeline entry titles → projects[] index for the modal button
+  const timelineProjectMap: Record<string, number> = {
+    "Developed CRM & BI Platform for Medisigh": projects.findIndex(p => p.title === "Medisigh CRM & BI"),
+    "Worked on DesignPlus at Project Mark": projects.findIndex(p => p.title === "Design+"),
+    "Developed Patient Evolution at Medisigh": projects.findIndex(p => p.title === "Patient Evolution"),
+  };
 
   const handleExperienceToggle = () => {
     if (showAllExperiences) {
@@ -453,10 +504,31 @@ export default function Home() {
   
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  useEffect(() => {
+    if (openProject !== null) {
+      document.body.classList.add('modal-open');
+    } else {
+      document.body.classList.remove('modal-open');
+    }
+    return () => {
+      document.body.classList.remove('modal-open');
+    };
+  }, [openProject]);
+
+  useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       // if (event.key === "Escape" && expandedProject !== null) {
       //   handleProjectCollapse();
       // }
+      if (event.key === "Escape" && lightboxImg !== null) {
+        setLightboxImg(null);
+        return;
+      }
+      if (event.key === "Escape" && openProject !== null) {
+        setOpenProject(null);
+      }
       if (event.key === "Escape" && mobileMenuOpen) {
         setMobileMenuOpen(false);
       }
@@ -466,7 +538,7 @@ export default function Home() {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [mobileMenuOpen]);
+  }, [mobileMenuOpen, openProject, lightboxImg]);
 
   
   useEffect(() => {
@@ -1176,24 +1248,19 @@ Proven track record delivering enterprise systems across healthcare, media, and 
             <div
               key={idx}
               className="experience-card default"
-              // onClick={() =>
-              //   expandedProject === null ? handleProjectExpand(idx) : undefined
-              // }
-              // style={{
-              //   cursor: expandedProject === null ? "pointer" : "default",
-              // }}
             >
-              {/* {expandedProject === idx && (
-                <div
-                  className="close-button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleProjectCollapse();
-                  }}
+              {exp.hasContent && (
+                <button
+                  className="project-view-btn"
+                  onClick={() => setOpenProject(idx)}
+                  title="Take a look"
                 >
-                  ×
-                </div>
-              )} */}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2"/>
+                  </svg>
+                </button>
+              )}
               <div className="upper">
                 <div className="experience-title">{exp.title}</div>
                 <div className="experience-where-when">
@@ -1217,6 +1284,7 @@ Proven track record delivering enterprise systems across healthcare, media, and 
                     />
                   ))}
                 </div>
+
               </div>
             </div>
           ))}
@@ -1278,6 +1346,19 @@ Proven track record delivering enterprise systems across healthcare, media, and 
                         <div className="experience-company-period">
                           {exp.company} • {exp.period}
                         </div>
+                        {timelineProjectMap[exp.title] !== undefined && timelineProjectMap[exp.title] !== -1 && (
+                          <button
+                            className="project-view-btn"
+                            style={{ position: 'static', marginTop: '0.5rem', alignSelf: 'flex-start' }}
+                            onClick={() => setOpenProject(timelineProjectMap[exp.title])}
+                            title="Take a look"
+                          >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                              <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2"/>
+                            </svg>
+                          </button>
+                        )}
                       </div>
                       <div className="experience-description">
                         {exp.description}
@@ -1529,6 +1610,143 @@ Proven track record delivering enterprise systems across healthcare, media, and 
         </div>
       )}
       
+      {/* Project Showcase Modal */}
+      {openProject !== null && (() => {
+        const proj = projects[openProject];
+        return (
+          <div
+            className="project-modal-overlay"
+            onClick={() => setOpenProject(null)}
+            role="dialog"
+            aria-modal="true"
+            aria-label={proj.title}
+          >
+            <div
+              className="project-modal"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="project-modal-header">
+                <div className="project-modal-title-group">
+                  <h2>{proj.title}</h2>
+                  <span>{proj.where} · {proj.when}</span>
+                </div>
+                <button
+                  className="project-modal-close"
+                  onClick={() => setOpenProject(null)}
+                  aria-label="Close modal"
+                >
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+
+              <div className="project-modal-body">
+                {proj.title === "Medisigh CRM & BI" && (
+                  <div className="modal-section modal-images-section">
+                    <img src="images/medisigh-crm.png" alt="Medisigh CRM" onClick={() => setLightboxImg("images/medisigh-crm.png")} />
+                    <img src="images/medisigh-crm-2.png" alt="Medisigh CRM 2" onClick={() => setLightboxImg("images/medisigh-crm-2.png")} />
+                    <img src="images/medisigh-crm-3.png" alt="Medisigh CRM 3" onClick={() => setLightboxImg("images/medisigh-crm-3.png")} />
+                    <img src="images/medisigh-bi.png" alt="Medisigh BI" onClick={() => setLightboxImg("images/medisigh-bi.png")} />
+                  </div>
+                )}
+
+                {proj.title === "Design+" && (
+                  <>
+                    <div className="modal-section modal-video-section">
+                      <iframe
+                        src="https://www.youtube.com/embed/ce_hgWbqRi0?start=24"
+                        title="Design+ Demo"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                    <div className="modal-section modal-link-section">
+                      <a
+                        href="https://www.projectmark.com/demos/projectmark---design-plus"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="modal-external-link"
+                      >
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <polyline points="15 3 21 3 21 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <line x1="10" y1="14" x2="21" y2="3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        Visit Project Page
+                      </a>
+                    </div>
+                  </>
+                )}
+
+                {proj.title === "vProMedia" && (
+                  <>
+                    <div className="modal-section modal-images-section">
+                      <img src="images/vpro-media.png" alt="vProMedia" onClick={() => setLightboxImg("images/vpro-media.png")} />
+                    </div>
+                    <div className="modal-section modal-link-section">
+                      <a
+                        href="https://vcreativeinc.com/products/vpromedia"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="modal-external-link"
+                      >
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <polyline points="15 3 21 3 21 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <line x1="10" y1="14" x2="21" y2="3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                        Visit Product Page
+                      </a>
+                    </div>
+                  </>
+                )}
+
+                {proj.title === "Patient Evolution" && (
+                  <div className="modal-section modal-images-section">
+                    <img src="images/evolucao-do-paciente.png" alt="Patient Evolution" onClick={() => setLightboxImg("images/evolucao-do-paciente.png")} />
+                  </div>
+                )}
+
+                {proj.title === "Medisigh" && (
+                  <div className="modal-section modal-link-section">
+                    <a
+                      href="http://medisigh.com.br/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="modal-external-link"
+                    >
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <polyline points="15 3 21 3 21 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <line x1="10" y1="14" x2="21" y2="3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                      Visit Medisigh
+                    </a>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* Lightbox */}
+      {lightboxImg && (
+        <div
+          className="lightbox-overlay"
+          onClick={() => setLightboxImg(null)}
+        >
+          <img src={lightboxImg} alt="Fullscreen preview" onClick={(e) => e.stopPropagation()} />
+          <button className="lightbox-close" onClick={() => setLightboxImg(null)} aria-label="Close">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      )}
+
       {/* Structured Data JSON-LD */}
       <script
         type="application/ld+json"
